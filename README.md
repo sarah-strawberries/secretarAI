@@ -1,6 +1,26 @@
 # secretarAI
 
+<!-- FRONTEND PROJECT PROPOSAL REQUIREMENT: Elevator pitch -->
 **Simplify your life with this personal AI-integrated secretary. Generate schedules, manage email subscriptions, handle to-do tasks, get summaries of information, and keep notes of things you need to remember, all in one place.**
+
+<!-- FRONTEND PROJECT PROPOSAL REQUIREMENT: 10+ views/pages -->
+<!--10+ views/pages:
+1. Login page
+1. Home page/dashboard
+1. Email management page
+1. Email subscription view
+1. Calendar page
+1. Voice/text input page for prompting Agent
+1. Reminders view/page
+1. To do list page
+1. Schedule generator page
+1. Legalese summarizer/Agreement management page -->
+
+<!-- FRONTEND PROJECT PROPOSAL REQUIREMENT: Project Risks -->
+<!-- Things I haven't done before
+- Integrating an MCP server
+- Working with Google APIs
+- Working with voice-to-text AI functionality -->
 
 ### Anticipated Release Date
 Version 1.0 has a planned debut of December 6th, 2025. Add this repository to your watch list to keep an eye on its progress in the mean time!
@@ -11,6 +31,7 @@ Version 1.0 has a planned debut of December 6th, 2025. Add this repository to yo
 
 View the requirements doc of planned functionality [here]().
 
+<!-- FRONTEND PROJECT PROPOSAL REQUIREMENT: Rough list of features -->
 ### Overview of Planned Functionality
 These are some of the main features you can look forward to using in secretarAI:
 - Email summarization and categorization
@@ -31,6 +52,19 @@ These are some of the main features you can look forward to using in secretarAI:
   <!-- - Use voice or text input to make note of things you want to remember, and set reminders for when you want to be shown that information next 
   - Get "nudges" to respond to certain emails if you haven't by a pre-specified date and time
   -->
+
+<!-- FRONTEND PROJECT PROPOSAL REQUIREMENT: 4 custom functions -->
+<!-- 4 custom functions (agent actions) that can be called:
+ - Estimate user's interest in an email subscription (possible function name: `inferUserInterestInSubscription`)
+ - Generate calendar item from text input
+ - Generate to-do from voice input
+ - Generate today's schedule from calendar events and to-dos
+ -->
+
+ <!-- FRONTEND PROJECT PROPOSAL REQUIREMENT: Additional tasks you'll be targeting -->
+<!-- Additional Tasks I'll Be Targeting:
+- Integrating a 3rd-party MCP server
+- Audio input from user (tap to record -> auto-transcribe) -->
 
 ### Platform Integration
 Version 1.0 of secretarAI will be integrated with tools from the Google office suite.
