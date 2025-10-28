@@ -5,12 +5,12 @@
 #### Estimates:
 
 Rubric items:
-- [ ] CI/CD Pipeline:
-- [ ] 
+- [ ] CI/CD Pipeline: pipeline set up to deploy app on git push; app should be deployed to a DuckDNS domain via Kubernetes
+- [ ] Linting in pipeline: deployment should fail if there are build errors in code or if style linting doesn't pass
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] All pages are created as blank pages
+- [ ] Branding (color palette, logo, and styles) and wireframes of app pages/views are complete
 
 #### Delivered
 
