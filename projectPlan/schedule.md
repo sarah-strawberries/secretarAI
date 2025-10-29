@@ -15,9 +15,10 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+None
 
 Features:
+None
 
 ---
 ### Checkpoint 2: `Nov. 1, 2025`
