@@ -25,19 +25,27 @@ None
 #### Estimates:
 
 Rubric items:
-- [ ] Authentication: 
-- [ ] item 2 with description
+- [ ] Authentication: figure out what is needed and set it up
+- [ ] Set up CI/CD with kubernetes
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Get branding mocked up
+- [ ] Create empty pages
 
 #### Delivered
+- Got duckdns domain name ready
+- Researched how to work with Google APIs
+- Set up a Google Cloud project for my app
+
 
 Rubric Items:
 
+- About 15% of a CI/CD is done
+
 
 Features:
+
+None on the actual app, mostly just planning
 
 ---
 ### Checkpoint 3: `Nov. 5, 2025`
