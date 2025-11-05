@@ -28,18 +28,26 @@ None
 
 Rubric items:
 - [ ] Authentication: user can log into Google account to get authenticated on site
-- [ ] 
+- [ ] Set up CI/CD with kubernetes
 
 Features:
 - [ ] Google Cloud Project Access: site can get data from Google Cloud Project that uses Google APIs and can display it on the page
-- [ ] feature 5 with description
+- [ ] Create empty pages
 
 #### Delivered
+- Got duckdns domain name ready
+- Researched how to work with Google APIs
+- Set up a Google Cloud project for my app
+
 
 Rubric Items:
 
+- About 15% of a CI/CD is done
+
 
 Features:
+
+None on the actual app, mostly just planning
 
 ---
 ### Checkpoint 3: `Nov. 5, 2025`
