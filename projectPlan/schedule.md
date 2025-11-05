@@ -15,9 +15,11 @@ Features:
 #### Delivered
 
 Rubric Items:
+
 None
 
 Features:
+
 None
 
 ---
@@ -25,11 +27,11 @@ None
 #### Estimates:
 
 Rubric items:
-- [ ] Authentication: 
-- [ ] item 2 with description
+- [ ] Authentication: user can log into Google account to get authenticated on site
+- [ ] 
 
 Features:
-- [ ] feature 4 with description
+- [ ] Google Cloud Project Access: site can get data from Google Cloud Project that uses Google APIs and can display it on the page
 - [ ] feature 5 with description
 
 #### Delivered
