@@ -1,0 +1,6 @@
+CREATE SEQUENCE IF NOT EXISTS users_id_seq;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY DEFAULT nextval('users_id_seq'),
+    email VARCHAR(255) UNIQUE NOT NULL
+);
