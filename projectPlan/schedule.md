@@ -55,19 +55,22 @@ None on the actual app, mostly just planning
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Get auth set up with Google accounts
+- [ ] Get CI/CD pipeline finished
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Get basic idea of branding
+- [ ] Get all pages created as blank pages
 
 #### Delivered
 
 Rubric Items:
-
+- Mostly finished docker setup for CI/CD
 
 Features:
+- Chose color palette and added colors to CSS file
+- Created Vite React + TS app for frontend
+- Created C# API for backend
 
 ---
 ### Checkpoint 4: `Nov. 8, 2025`
