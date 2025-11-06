@@ -59,7 +59,7 @@ Rubric items:
 - [ ] Get CI/CD pipeline finished
 
 Features:
-- [ ] Get basic idea of branding
+- [x] Get basic idea of branding
 - [ ] Get all pages created as blank pages
 
 #### Delivered
@@ -78,12 +78,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Get auth set up with Google accounts
+- [ ] Use local storage to store user's email address
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Build out UI of homepage/dashboard
+- [ ] Replace all default pages with customized ones
 
 #### Delivered
 
@@ -98,12 +98,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Set up authentication for authorized-only pages
+- [ ] Add tests/linting in CI/CD pipeline
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Test chat endpoint in http file with system prompts
+- [ ] Test Google API endpoints in http file
 
 #### Delivered
 
@@ -118,12 +118,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Set up toasts to notify when user logs in/out
+- [ ] Set up error handling for failed API requests and render errors
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Display calendar and email data in app
+- [ ] Communicate with chat bot on various pages; make sure it has the right system prompts for each different page
 
 #### Delivered
 
@@ -138,12 +138,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Store client-side state (copy of email/calendar data) and manage it with TanStack Query
+- [ ] Set up user account management page
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Set up database tables to store data for each user
+- [ ] 4+ generic  layout components
 
 #### Delivered
 
@@ -158,12 +158,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Set up MCP server
+- [ ] Creation of calendar events and to-do tasks from chat messages
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Audio input to text
+- [ ] Mobile-responsive UI features
 
 #### Delivered
 
@@ -178,12 +178,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Agent function to assess whether user cares about email subscriptions
+- [ ] Fix UI bugs
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Note/reminder management UI
+- [ ] Email categorization: bot can make email categories and organize emails according to rules you describe
 
 #### Delivered
 
@@ -198,12 +198,12 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Catch up on anything I may have gotten stuck on
+- [ ] Make sure site is completely mobile and desktop friendly (do user testing if possible)
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Add legalese summarizer page (if time)
+- [ ] Clean up dead and ugly code
 
 #### Delivered
 
@@ -218,12 +218,10 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] item 1 with description
-- [ ] item 2 with description
+- [ ] Catch up on anything I may have gotten stuck on
 
 Features:
-- [ ] feature 4 with description
-- [ ] feature 5 with description
+- [ ] Catch up on anything I may have gotten stuck on
 
 #### Delivered
 
