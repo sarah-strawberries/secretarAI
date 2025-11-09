@@ -17,8 +17,10 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
-          export KUBECONFIG=kubeconfig
+          mkdir -p $HOME/.kube
+          echo $KUBECONFIG_BASE64 | base64 -d > $HOME/.kube/config
+        env:
+          KUBECONFIG_BASE64: ${{ secrets.KUBECONFIG }}
 
       - name: Create postgres secret
         run: |
