@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: secretarai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: sarahstrawberries/aichat-sarah-strawberries-api
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        - name: ASPNETCORE_URLS
+          value: http://+:5000
+        - name: ConnectionStrings__DefaultConnection
+          value: Host=postgres;Database=secretarai;Username=secretarai_user;Password=secretarai_password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: secretarai
+spec:
+  selector:
+    app: api
+  ports:
+  - port: 5000
+    targetPort: 5000

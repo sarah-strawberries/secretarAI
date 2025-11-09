@@ -1,0 +1,38 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Configure kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+      - name: Create postgres secret
+        run: |
+          kubectl create secret generic postgres-secret \
+            --namespace=secretarai \
+            --from-literal=POSTGRES_DB=secretarai \
+            --from-literal=POSTGRES_USER=secretarai_user \
+            --from-literal=POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f kube/namespace.yaml
+          kubectl apply -f kube/postgres.yaml
+          kubectl apply -f kube/api.yaml
+          kubectl apply -f kube/web.yaml
+          kubectl apply -f kube/ingress.yaml
