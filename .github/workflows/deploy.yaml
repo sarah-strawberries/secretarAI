@@ -20,8 +20,12 @@ jobs:
           mkdir -p $HOME/.kube
           echo "$KUBECONFIG_BASE64" | base64 -d > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
+          kubectl cluster-info
         env:
           KUBECONFIG_BASE64: ${{ secrets.KUBECONFIG }}
+
+      - name: Deploy namespace
+        run: kubectl apply -f kube/namespace.yaml
 
       - name: Create postgres secret
         run: |
@@ -34,7 +38,6 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f kube/namespace.yaml
           kubectl apply -f kube/postgres.yaml
           kubectl apply -f kube/api.yaml
           kubectl apply -f kube/web.yaml
