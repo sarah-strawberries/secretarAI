@@ -88,10 +88,13 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+- Part of auth is finished
+- Deployment pipeline exists, but doesn't succeedd yet
+- Linting exists in pipeline (but is not yet set to warn as error)
 
 Features:
-
+- Login button is visible and can be clicked
+- Keycloak has Google set up as auth provider (even though auth doesn't fully work yet)
 ---
 ### Checkpoint 5: `Nov. 12, 2025`
 
