@@ -111,10 +111,10 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+- No additional rubric items completed
 
 Features:
-
+- No additional features completed
 ---
 ### Checkpoint 6: `Nov. 15, 2025`
 
