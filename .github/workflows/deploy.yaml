@@ -7,22 +7,10 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          echo "$KUBECONFIG_BASE64" | base64 -d > $HOME/.kube/config
-          chmod 600 $HOME/.kube/config
-          kubectl cluster-info
-        env:
-          KUBECONFIG_BASE64: ${{ secrets.KUBECONFIG }}
 
       - name: Deploy namespace
         run: kubectl apply -f kube/namespace.yaml
