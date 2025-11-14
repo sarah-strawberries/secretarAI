@@ -4,6 +4,7 @@ metadata:
   name: secretarai
   namespace: secretarai
 spec:
+  ingressClassName: nginx
   rules:
   - host: secretarai.duckdns.org
     http:
