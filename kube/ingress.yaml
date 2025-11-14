@@ -5,7 +5,7 @@ metadata:
   namespace: secretarai
 spec:
   rules:
-  - host: https://secretarai.duckdns.org
+  - host: secretarai.duckdns.org
     http:
       paths:
       - path: /api
