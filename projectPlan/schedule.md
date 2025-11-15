@@ -56,7 +56,7 @@ None on the actual app, mostly just planning
 
 Rubric items:
 - [ ] Get auth set up with Google accounts
-- [ ] Get CI/CD pipeline finished
+- [x] Get CI/CD pipeline finished
 
 Features:
 - [x] Get basic idea of branding
@@ -131,9 +131,11 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+- Finished CI/CD pipeline: app deploys on push via Kubernetes and gets hosted on duckdns domain
+- Got auth partway implemented (about 70% done with API auth, and probably 30% of frontend)
 
 Features:
+- No additional features added for this checkpoint
 
 ---
 ### Checkpoint 7: `Nov. 19, 2025`
