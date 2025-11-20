@@ -153,9 +153,10 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+- No additional rubric items completed
 
 Features:
+- No additional features completed
 
 ---
 ### Checkpoint 8: `Nov. 22, 2025`
