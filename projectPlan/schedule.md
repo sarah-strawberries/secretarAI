@@ -174,10 +174,11 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+- None delivered this checkpoint
 
 Features:
-
+- Got self-hosted actions runner configured as a service
+ 
 ---
 ### Checkpoint 9: `Nov. 25, 2025`
 
