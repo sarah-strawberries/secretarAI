@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: sarahstrawberries/aichat-sarah-strawberries-api
+        image: sarahstrawberries/aichat-sarah-strawberries-api:0.0.1
         ports:
         - containerPort: 5000
         env:
