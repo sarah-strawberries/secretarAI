@@ -16,6 +16,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
+      image: sarahstrawberries/secretarai-api:0.0.1
     container_name: secretarai-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -31,6 +32,7 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
+      image: sarahstrawberries/secretarai-web:0.0.1
     container_name: secretarai-web
     environment:
       - VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
