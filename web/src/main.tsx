@@ -9,6 +9,7 @@ const oidcConfig = {
   authority: import.meta.env.VITE_OIDC_AUTHORITY ?? "",
   client_id: import.meta.env.VITE_OIDC_CLIENT_ID ?? "",
   redirect_uri: import.meta.env.VITE_OIDC_REDIRECT_URI ?? "",
+  extraQueryParams: { kc_idp_hint: "google" },
 };
 
 // Create a safe storage wrapper that falls back to an in-memory store when
