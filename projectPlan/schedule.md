@@ -195,10 +195,10 @@ Features:
 #### Delivered
 
 Rubric Items:
-
+- None delivered this checkpoint
 
 Features:
-
+- None delivered this checkpoint
 ---
 ### Checkpoint 10: `Dec. 3, 2025`
 
