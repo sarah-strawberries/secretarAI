@@ -65,7 +65,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseHttpsRedirection();
+app.MapGet("/", () => "Hello!");
 
 var summaries = new[]
 {
