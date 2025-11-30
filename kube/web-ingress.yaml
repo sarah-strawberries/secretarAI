@@ -1,23 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: secretarai
+  name: secretarai-web
   namespace: secretarai
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
   - host: secretarai.duckdns.org
     http:
       paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: api
-            port:
-              number: 5000
       - path: /
         pathType: Prefix
         backend:

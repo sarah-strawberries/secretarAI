@@ -29,4 +29,5 @@ jobs:
           kubectl apply -f kube/postgres.yaml
           kubectl apply -f kube/api.yaml
           kubectl apply -f kube/web.yaml
-          kubectl apply -f kube/ingress.yaml
+          kubectl apply -f kube/api-ingress.yaml
+          kubectl apply -f kube/web-ingress.yaml
