@@ -54,7 +54,7 @@ function App() {
     if (auth.isAuthenticated) {
         return (
         <div>
-            Hello {auth.user?.profile.sub}{" "}
+            Hello {auth.user?.profile.name}{" "}
             <button onClick={() => void auth.signoutRedirect()}>Log out</button>
         </div>
         );
