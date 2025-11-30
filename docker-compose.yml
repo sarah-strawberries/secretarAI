@@ -37,7 +37,7 @@ services:
     environment:
       - VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
       - VITE_OIDC_CLIENT_ID=secretarai-client
-      - VITE_OIDC_REDIRECT_URI=https://auth-dev.snowse.io/realms/secretarai/protocol/openid-connect/auth
+      - VITE_OIDC_REDIRECT_URI=http://localhost:5173/auth/callback/
     ports:
       - "3000:80"
     depends_on:

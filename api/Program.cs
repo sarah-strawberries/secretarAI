@@ -1,3 +1,4 @@
+using api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddScoped<DatabaseService>();
 var allowedOrigin = builder.Configuration["ALLOWED_ORIGIN"] ?? "http://localhost:5173";
 builder.Services.AddCors(options =>
 {
@@ -36,6 +38,19 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnTokenValidated = async context =>
+        {
+            var dbService = context.HttpContext.RequestServices.GetRequiredService<DatabaseService>();
+            var preferredName = context.Principal?.FindFirst("preferred_name")?.Value;
+            
+            if (!string.IsNullOrEmpty(preferredName))
+            {
+                await dbService.EnsureUserExistsAsync(preferredName);
+            }
+        }
     };
 });
 
