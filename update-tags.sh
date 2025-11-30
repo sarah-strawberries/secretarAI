@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# To run this script in WSL, use this: chmod +x update-tags.sh && ./update-tags.sh
+
 NEW_TAG="0.0.4"
 
 # Find and replace all occurrences of sarahstrawberries/secretarai-api and sarahstrawberries/secretarai-web tags
