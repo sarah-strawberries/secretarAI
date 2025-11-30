@@ -3,14 +3,16 @@ kind: Ingress
 metadata:
   name: secretarai
   namespace: secretarai
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
   - host: secretarai.duckdns.org
     http:
       paths:
-      - path: /api
-        pathType: Prefix
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: api
