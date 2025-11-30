@@ -20,9 +20,6 @@ builder.Services.AddCors(options =>
 });
 
 // Configure auth
-var jwtKey = builder.Configuration["Jwt:Key"] ?? "replace-with-secure-key-in-k8s-secret";
-var keyBytes = Encoding.UTF8.GetBytes(jwtKey);
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -30,25 +27,23 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
+    options.Authority = builder.Configuration["Keycloak:Authority"];
     options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = false,
         ValidateAudience = false,
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+        NameClaimType = "email"
     };
     options.Events = new JwtBearerEvents
     {
         OnTokenValidated = async context =>
         {
             var dbService = context.HttpContext.RequestServices.GetRequiredService<DatabaseService>();
-            var preferredName = context.Principal?.FindFirst("preferred_name")?.Value;
+            var email = context.Principal?.FindFirst("email")?.Value;
             
-            if (!string.IsNullOrEmpty(preferredName))
+            if (!string.IsNullOrEmpty(email))
             {
-                await dbService.EnsureUserExistsAsync(preferredName);
+                await dbService.EnsureUserExistsAsync(email);
             }
         }
     };
@@ -92,8 +87,17 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .RequireAuthorization();
 
+app.MapPost("/user-login", async (DatabaseService db, UserLogin request) =>
+{
+    if (string.IsNullOrEmpty(request.Email)) return Results.BadRequest("Email is required");
+    await db.EnsureUserExistsAsync(request.Email);
+    return Results.Ok();
+})
+.RequireAuthorization();
+
 app.Run();
 
+record UserLogin(string Email);
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);

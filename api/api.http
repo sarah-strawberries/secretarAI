@@ -4,3 +4,12 @@ GET {{api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{api_HostAddress}}/user-login
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "email": "testuser@example.com"
+}
+

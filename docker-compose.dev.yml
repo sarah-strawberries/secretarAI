@@ -22,6 +22,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__DefaultConnection=Host=db;Database=secretarai;Username=secretarai_user;Password=secretarai_password
+      - Keycloak__Authority=https://auth-dev.snowse.io/realms/secretarai
+      - Keycloak__Audience=secretarai-client
     ports:
       - "5000:5000"
     depends_on:
@@ -33,11 +35,11 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
+      args:                  # These need to be args instead of env vars to be picked up at build time
+        VITE_OIDC_AUTHORITY: https://auth-dev.snowse.io/realms/secretarai
+        VITE_OIDC_CLIENT_ID: secretarai-client
+        VITE_OIDC_REDIRECT_URI: http://localhost:3000/auth/callback/
     container_name: secretarai-web
-    environment:
-      - VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
-      - VITE_OIDC_CLIENT_ID=secretarai-client
-      - VITE_OIDC_REDIRECT_URI=http://localhost:5173/auth/callback/
     ports:
       - "3000:80"
     depends_on:
