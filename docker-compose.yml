@@ -29,10 +29,10 @@ services:
     restart: unless-stopped
 
   web:
+    image: sarahstrawberries/secretarai-web:0.0.2
     build:
       context: ./web
       dockerfile: Dockerfile
-      image: sarahstrawberries/secretarai-web:0.0.2
     container_name: secretarai-web
     environment:
       - VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
