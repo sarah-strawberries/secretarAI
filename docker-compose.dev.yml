@@ -29,15 +29,15 @@ services:
     restart: unless-stopped
 
   web:
+    image: sarahstrawberries/secretarai-web:0.0.1
     build:
       context: ./web
       dockerfile: Dockerfile
-      image: sarahstrawberries/secretarai-web:0.0.1
     container_name: secretarai-web
     environment:
       - VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
       - VITE_OIDC_CLIENT_ID=secretarai-client
-      - VITE_OIDC_REDIRECT_URI=http://secretarai.duckdns.org/auth/callback/
+      - VITE_OIDC_REDIRECT_URI=http://localhost:5173/auth/callback/
     ports:
       - "3000:80"
     depends_on:
