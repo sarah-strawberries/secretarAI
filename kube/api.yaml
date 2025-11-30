@@ -25,6 +25,10 @@ spec:
           value: http://+:5000
         - name: ConnectionStrings__DefaultConnection
           value: Host=postgres;Database=secretarai;Username=secretarai_user;Password=secretarai_password
+        - name: Keycloak__Authority
+          value: https://auth-dev.snowse.io/realms/secretarai
+        - name: Keycloak__Audience
+          value: secretarai-client
 ---
 apiVersion: v1
 kind: Service
