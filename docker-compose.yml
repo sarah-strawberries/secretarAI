@@ -13,7 +13,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   api:
-    image: sarahstrawberries/secretarai-api:0.0.1
+    image: sarahstrawberries/secretarai-api:0.0.2
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
-      image: sarahstrawberries/secretarai-web:0.0.1
+      image: sarahstrawberries/secretarai-web:0.0.2
     container_name: secretarai-web
     environment:
       - VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
