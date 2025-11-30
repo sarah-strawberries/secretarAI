@@ -55,7 +55,7 @@ function App() {
         return (
         <div>
             Hello {auth.user?.profile.sub}{" "}
-            <button onClick={() => void auth.removeUser()}>Log out</button>
+            <button onClick={() => void auth.signoutRedirect()}>Log out</button>
         </div>
         );
     }

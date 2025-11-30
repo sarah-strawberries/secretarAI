@@ -13,6 +13,7 @@ const oidcConfig = {
   // redirect_uri: "https://secretarai.duckdns.org/auth/callback",
   // redirect_uri: "http://localhost:5173/auth/callback",
   redirect_uri: import.meta.env.VITE_OIDC_REDIRECT_URI ?? "",
+  post_logout_redirect_uri: window.location.origin,
   extraQueryParams: { kc_idp_hint: "google" },
 };
 
