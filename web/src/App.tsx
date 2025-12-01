@@ -4,6 +4,7 @@ import "./App.css";
 import { useAuth } from "react-oidc-context";
 import { GlobalHeader } from "./components/GlobalHeader";
 import { EmailManagementPage } from "./pages/EmailManagementPage";
+import { ScheduleGeneratorPage } from "./pages/ScheduleGeneratorPage";
 
 function SigningMessage({ message }: { message: string }) {
     return (
@@ -29,6 +30,13 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
                     className="inline-flex items-center justify-center rounded-xl bg-[var(--blue-500)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--blue-400)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                     Open Email Management
+                </button>
+                <button
+                    type="button"
+                    onClick={() => navigate("/schedule")}
+                    className="inline-flex items-center justify-center rounded-xl border border-transparent bg-white px-6 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-100)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                >
+                    Open Schedule Generator
                 </button>
             </div>
         </section>
@@ -109,6 +117,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<AuthenticatedHome displayName={displayName} />} />
                         <Route path="/emails" element={<EmailManagementPage />} />
+                        <Route path="/schedule" element={<ScheduleGeneratorPage />} />
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </main>

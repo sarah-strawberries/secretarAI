@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
 
   web:
-    image: sarahstrawberries/secretarai-web:0.0.5
+    image: sarahstrawberries/secretarai-web:0.0.6
     build:
       context: ./web
       dockerfile: Dockerfile

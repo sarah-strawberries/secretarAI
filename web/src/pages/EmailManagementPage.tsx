@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { SidebarList, type SidebarListItem } from "../components/SidebarList";
 
 type Email = {
   id: string;
@@ -43,6 +44,15 @@ export function EmailManagementPage() {
   const [selectedEmailId, setSelectedEmailId] = useState<string>(EMAILS[0]?.id ?? "");
 
   const selectedEmail = useMemo(() => EMAILS.find((email) => email.id === selectedEmailId) ?? EMAILS[0], [selectedEmailId]);
+  const emailListItems = useMemo<SidebarListItem[]>(
+    () =>
+      EMAILS.map((email) => ({
+        id: email.id,
+        title: email.subject,
+        subtitle: formatDisplayDate(email.date),
+      })),
+    []
+  );
 
   if (!selectedEmail) {
     return (
@@ -56,29 +66,7 @@ export function EmailManagementPage() {
     <div className="flex min-h-[28rem] flex-1 flex-col gap-4">
       <h1 className="text-2xl font-semibold text-[var(--blue-700)]">Email Management</h1>
       <div className="flex flex-1 flex-col gap-4 rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--tan-100)] p-4 shadow-sm sm:flex-row">
-        <section className="w-full shrink-0 space-y-3 sm:w-72">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--coolgrey-500)]">Inbox</h2>
-          <div className="space-y-2">
-            {EMAILS.map((email) => {
-              const isSelected = email.id === selectedEmail.id;
-              return (
-                <button
-                  key={email.id}
-                  type="button"
-                  onClick={() => setSelectedEmailId(email.id)}
-                  className={`w-full rounded-xl border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-400)] focus-visible:ring-offset-2 ${
-                    isSelected
-                      ? "border-[var(--blue-400)] bg-[var(--blue-100)] text-[var(--blue-700)]"
-                      : "border-transparent bg-[var(--tan-200)] text-[var(--coolgrey-600)] hover:border-[var(--bluegrey-300)] hover:bg-[var(--bluegrey-100)]"
-                  }`}
-                >
-                  <p className="text-sm font-semibold leading-snug">{email.subject}</p>
-                  <p className="mt-1 text-xs text-[var(--coolgrey-400)]">{formatDisplayDate(email.date)}</p>
-                </button>
-              );
-            })}
-          </div>
-        </section>
+        <SidebarList title="Inbox" items={emailListItems} selectedId={selectedEmail.id} onSelect={setSelectedEmailId} />
         <section className="flex flex-1 flex-col gap-3 rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--bluegrey-100)] p-5">
           <header className="space-y-1">
             <p className="text-xs font-medium uppercase tracking-wide text-[var(--coolgrey-500)]">Subject</p>
