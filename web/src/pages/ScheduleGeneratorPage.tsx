@@ -105,7 +105,7 @@ export function ScheduleGeneratorPage() {
                 type="button"
                 className="mt-6 inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-white px-5 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-300)] hover:text-[var(--blue-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--coolgrey-100)]"
               >
-                Generate Schedule
+                Generate Schedule (this feature coming soon!)
               </button>
             </div>
             <div className="rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--coolgrey-100)] p-4">
