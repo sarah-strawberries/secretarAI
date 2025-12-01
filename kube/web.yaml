@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: sarahstrawberries/secretarai-web:0.0.6
+        image: sarahstrawberries/secretarai-web:0.0.7
         ports:
         - containerPort: 80
 ---
