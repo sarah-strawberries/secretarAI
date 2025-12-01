@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "react-oidc-context";
 import { WebStorageStateStore, Log } from 'oidc-client-ts';
 import './index.css'
@@ -10,8 +11,6 @@ Log.setLevel(Log.INFO);
 const oidcConfig = {
   authority: import.meta.env.VITE_OIDC_AUTHORITY ?? "",
   client_id: import.meta.env.VITE_OIDC_CLIENT_ID ?? "",
-  // redirect_uri: "https://secretarai.duckdns.org/auth/callback",
-  // redirect_uri: "http://localhost:5173/auth/callback",
   redirect_uri: import.meta.env.VITE_OIDC_REDIRECT_URI ?? "",
   post_logout_redirect_uri: window.location.origin,
   extraQueryParams: { kc_idp_hint: "google" },
@@ -43,7 +42,8 @@ function createSafeStorage(): Storage {
     ls.setItem(testKey, '1');
     ls.removeItem(testKey);
     return ls;
-  } catch (e) {
+  } catch (error) {
+    console.warn("Falling back to in-memory OIDC storage.", error);
     // Fallback to in-memory store
     const memory = new Map<string, string>();
     const fallback = {
@@ -67,6 +67,8 @@ const onSigninCallback = () => {
 
 createRoot(document.getElementById('root')!).render(
     <AuthProvider {...oidcConfig} userStore={userStore} stateStore={stateStore} onSigninCallback={onSigninCallback}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </AuthProvider>,
 )

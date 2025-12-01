@@ -1,68 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* Light Tan */
+  --tan-100: #faf6f1;
+  --tan-200: #f0e3d6;
+  --tan-300: #e3d4c3;
+  --tan-400: #cfbeab;
+  --tan-500: #bfa48d;
+  --tan-600: #a6876e;
+  --tan-700: #8b6b53;
+
+  /* Blue Grey */
+  --bluegrey-100: #eff6f9;
+  --bluegrey-200: #d9e7ef;
+  --bluegrey-300: #c4d8e2;
+  --bluegrey-400: #abc2cf;
+  --bluegrey-500: #8fa8b6;
+  --bluegrey-600: #708a98;
+  --bluegrey-700: #516a78;
+
+  /* Cool Grey */
+  --coolgrey-100: #cfd3d5;
+  --coolgrey-200: #b5b9bc;
+  --coolgrey-300: #9a9fa2;
+  --coolgrey-400: #7f8487;
+  --coolgrey-500: #666c70;
+  --coolgrey-600: #4c5256;
+  --coolgrey-700: #32373a;
+
+  /* Blue */
+  --blue-100: #d7e9fb;
+  --blue-200: #a8ccf4;
+  --blue-300: #7aafed;
+  --blue-400: #4b92e5;
+  --blue-500: #2673bf;
+  --blue-600: #1d5c99;
+  --blue-700: #154472;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--tan-100);
+  color: var(--coolgrey-700);
+}
+
+#root {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+a {
+  color: inherit;
 }
