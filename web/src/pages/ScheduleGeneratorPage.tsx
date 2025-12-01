@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SidebarList, type SidebarListItem } from "../components/SidebarList";
 
 type CalendarItem = {
@@ -39,6 +40,7 @@ export function ScheduleGeneratorPage() {
   const [selectedItemId, setSelectedItemId] = useState<string>(CALENDAR_ITEMS[0]?.id ?? "");
   const [bulletStyle, setBulletStyle] = useState<"checkbox" | "classic">("checkbox");
   const [autoIncludeTodos, setAutoIncludeTodos] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const listItems = useMemo<SidebarListItem[]>(
     () =>
@@ -110,6 +112,7 @@ export function ScheduleGeneratorPage() {
               <button
                 type="button"
                 className="inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-white px-5 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-300)] hover:text-[var(--blue-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--coolgrey-100)]"
+                onClick={() => navigate("/schedule-history")}
               >
                 View Past Schedules
               </button>

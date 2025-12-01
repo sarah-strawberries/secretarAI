@@ -5,6 +5,7 @@ import { useAuth } from "react-oidc-context";
 import { GlobalHeader } from "./components/GlobalHeader";
 import { EmailManagementPage } from "./pages/EmailManagementPage";
 import { ScheduleGeneratorPage } from "./pages/ScheduleGeneratorPage";
+import { ScheduleHistoryPage } from "./pages/ScheduleHistoryPage";
 
 function SigningMessage({ message }: { message: string }) {
     return (
@@ -118,6 +119,7 @@ function App() {
                         <Route path="/" element={<AuthenticatedHome displayName={displayName} />} />
                         <Route path="/emails" element={<EmailManagementPage />} />
                         <Route path="/schedule" element={<ScheduleGeneratorPage />} />
+                        <Route path="/schedule-history" element={<ScheduleHistoryPage />} />
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </main>
