@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy namespace
-        run: kubectl apply -f kube/namespace.yaml
+        run: kubectl apply -f kube/namespace.yml
 
       - name: Create postgres secret
         run: |
@@ -26,8 +26,8 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f kube/postgres.yaml
-          kubectl apply -f kube/api.yaml
-          kubectl apply -f kube/web.yaml
-          kubectl apply -f kube/api-ingress.yaml
-          kubectl apply -f kube/web-ingress.yaml
+          kubectl apply -f kube/postgres.yml
+          kubectl apply -f kube/api.yml
+          kubectl apply -f kube/web.yml
+          kubectl apply -f kube/api-ingress.yml
+          kubectl apply -f kube/web-ingress.yml
