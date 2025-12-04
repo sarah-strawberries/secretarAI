@@ -14,7 +14,6 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
   const [conversationId, setConversationId] = useState<number | null>(null);
   const auth = useAuth();
 
-  // Zod validators for API shapes used by the client
   const CreateConversationResponseSchema = z.object({
     conversation: z.object({ id: z.number() }),
   });
@@ -41,7 +40,6 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     setConversationId(null);
   };
 
-  // Fetch conversations using useQuery
   const fetchConversations = async () => {
     const res = await fetch("/api/conversations", {
       headers: {
@@ -65,7 +63,6 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     data: conversations = [],
     refetch: refreshConversations,
     isLoading: conversationsLoading,
-    // error: conversationsError (not used)
   } = useQuery({
     queryKey: ['conversations'],
     queryFn: fetchConversations,
@@ -106,10 +103,8 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
   const selectConversation = async (id: number) => {
     if (!id || id === conversationId) return;
     setConversationId(id);
-    // useQuery will refetch messages automatically
   };
 
-  // Fetch messages using useQuery
   const fetchMessages = async (conversationId: number | null) => {
     if (!conversationId) return [];
     const res = await fetch(`/api/conversations/${conversationId}/messages`, {
@@ -134,7 +129,6 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     data: messages = [],
     isLoading: loading,
     refetch: refetchMessages,
-    // error: messagesError (not used)
   } = useQuery({
     queryKey: ['messages', conversationId],
     queryFn: () => fetchMessages(conversationId),
@@ -150,7 +144,6 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
       setAiResponse("");
       let convId = conversationId;
       if (!convId) {
-        // lazily create a conversation if missing (e.g., after reset)
         convId = await createConversation();
         setConversationId(convId);
       }
@@ -180,10 +173,8 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     mutationFn: sendLatestMessage,
     onSuccess: (data) => {
       setAiResponse(data.assistantText);
-      // Refetch messages after sending
       refetchMessages();
       if (messages.length === 0) {
-        // server may have auto-titled conversation; refresh list
         refreshConversations();
       }
     },
