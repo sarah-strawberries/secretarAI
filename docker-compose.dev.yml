@@ -13,7 +13,6 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   api:
-    image: sarahstrawberries/secretarai-api:0.0.4
     build:
       context: ./api
       dockerfile: Dockerfile
@@ -31,7 +30,6 @@ services:
     restart: unless-stopped
 
   web:
-    image: sarahstrawberries/secretarai-web:0.0.8
     build:
       context: ./web
       dockerfile: Dockerfile
