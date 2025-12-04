@@ -33,7 +33,7 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
-      args:                  # These need to be args instead of env vars to be picked up at build time
+      args: # These need to be args instead of env vars to be picked up at build time
         VITE_OIDC_AUTHORITY: https://auth-dev.snowse.io/realms/secretarai
         VITE_OIDC_CLIENT_ID: secretarai-client
         VITE_OIDC_REDIRECT_URI: http://localhost:3000/auth/callback/

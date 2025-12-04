@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const MessageProvider: React.FC<Props> = ({ children }) => {
-  const [aiResponse, setAiResponse] = useState<string>("");
+  const [mostRecentAiResponse, setAiResponse] = useState<string>("");
   const [conversationId, setConversationId] = useState<number | null>(null);
   const auth = useAuth();
 
@@ -185,7 +185,7 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
 
   const value = {
     messages,
-    aiResponse,
+    mostRecentAiResponse,
     loading,
     sendMessageMutation,
     resetChat,

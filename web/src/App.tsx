@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import { useAuth } from "react-oidc-context";
+import { useAppAuth } from "./hooks/useAppAuth";
 import { GlobalHeader } from "./components/GlobalHeader";
 import { CalendarPage } from "./pages/CalendarPage";
 import { EmailManagementPage } from "./pages/EmailManagementPage";
@@ -53,20 +52,7 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
 }
 
 function App() {
-    const auth = useAuth();
-
-    useEffect(() => {
-        if (auth.isAuthenticated && auth.user?.profile.name) {
-            void fetch("/api/user-login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${auth.user.access_token}`,
-                },
-                body: JSON.stringify({ email: auth.user.profile.name }),
-            });
-        }
-    }, [auth.isAuthenticated, auth.user]);
+    const auth = useAppAuth();
 
     switch (auth.activeNavigator) {
         case "signinSilent":
