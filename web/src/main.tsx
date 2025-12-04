@@ -2,11 +2,15 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "react-oidc-context";
 import { WebStorageStateStore, Log } from 'oidc-client-ts';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 import './index.css'
 import App from './App.tsx'
 
 Log.setLogger(console);
 Log.setLevel(Log.INFO);
+
+const queryClient = new QueryClient();
 
 const oidcConfig = {
   authority: import.meta.env.VITE_OIDC_AUTHORITY ?? "",
@@ -67,8 +71,11 @@ const onSigninCallback = () => {
 
 createRoot(document.getElementById('root')!).render(
     <AuthProvider {...oidcConfig} userStore={userStore} stateStore={stateStore} onSigninCallback={onSigninCallback}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App />
+          <Toaster />
+        </BrowserRouter>
+      </QueryClientProvider>
     </AuthProvider>,
 )
