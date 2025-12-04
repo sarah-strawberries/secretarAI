@@ -205,19 +205,28 @@ Features:
 #### Estimates:
 
 Rubric items:
-- [ ] Catch up on anything I may have gotten stuck on
-- [ ] Make sure site is completely mobile and desktop friendly (do user testing if possible)
+- [x] Catch up on anything I may have gotten stuck on
+- [x] Make sure site is completely mobile and desktop friendly (do user testing if possible)
 
 Features:
-- [ ] Add legalese summarizer page (if time)
-- [ ] Clean up dead and ugly code
+- [x] Add legalese summarizer page (if time)
+- [x] Clean up dead and ugly code
 
 #### Delivered
 
 Rubric Items:
-
+- Made UX mobile friendly
+- Worked on creating professional, organized and smooth experience
+- Started adding toasts with React Toast
+- Added some `zod` validation for chat context
+- Started integrating TanStack Query for state management
 
 Features:
+- Created some of the pages
+- Put placeholder data in so I could get my UI structure in for a few pages
+- Started on implementing the chat context
+- Cleaned up a bunch of code
+- Fixed my development environment so I can run locally and get the correct redirect uri on login (this is something I had been stuck on)
 
 ---
 ### Final Checkpoint: `Dec. 6, 2025`
