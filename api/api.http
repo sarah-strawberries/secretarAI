@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-POST {{api_HostAddress}}/user-login
+POST {{api_HostAddress}}/account-login
 Content-Type: application/json
 Authorization: Bearer <token>
 

@@ -1,4 +1,5 @@
 using api.Services;
+using api.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -36,10 +37,11 @@ builder.Services.AddAuthentication(options =>
         {
             var dbService = context.HttpContext.RequestServices.GetRequiredService<DatabaseService>();
             var email = context.Principal?.FindFirst("email")?.Value;
+            var name = context.Principal?.FindFirst("name")?.Value ?? "Unknown";
 
             if (!string.IsNullOrEmpty(email))
             {
-                await dbService.EnsureUserExistsAsync(email);
+                await dbService.EnsureAccountExistsAsync(new Account { Email = email, DisplayName = name });
             }
         }
     };
@@ -62,14 +64,14 @@ app.UseAuthorization();
 
 app.MapGet("/", () => "Why hello! \n What are you snooping around here for?\n\nDon't worry; all the important endpoints require authorization. ;)");
 
-app.MapPost("/user-login", async (DatabaseService db, UserLogin request) =>
+app.MapPost("/account-login", async (DatabaseService db, AccountLogin request) =>
 {
     if (string.IsNullOrEmpty(request.Email)) return Results.BadRequest("Email is required");
-    await db.EnsureUserExistsAsync(request.Email);
+    await db.EnsureAccountExistsAsync(new Account { Email = request.Email, DisplayName = request.DisplayName });
     return Results.Ok();
 })
 .RequireAuthorization();
 
 app.Run();
 
-record UserLogin(string Email);
+record AccountLogin(string Email, string DisplayName);

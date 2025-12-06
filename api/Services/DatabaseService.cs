@@ -19,7 +19,7 @@ public class DatabaseService
         return new NpgsqlConnection(_connectionString);
     }
 
-    public async Task EnsureUserExistsAsync(string email)
+    public async Task EnsureAccountExistsAsync(string email, string displayName)
     {
         using var connection = CreateConnection();
         var sql = "SELECT COUNT(1) FROM secretarai.account WHERE email = @Email";
@@ -27,8 +27,8 @@ public class DatabaseService
 
         if (count == 0)
         {
-            var insertSql = "INSERT INTO secretarai.account (email) VALUES (@Email)";
-            await connection.ExecuteAsync(insertSql, new { Email = email });
+            var insertSql = "INSERT INTO secretarai.account (email, display_name) VALUES (@Email, @DisplayName)";
+            await connection.ExecuteAsync(insertSql, new { Email = email, DisplayName = displayName });
         }
     }
 }
