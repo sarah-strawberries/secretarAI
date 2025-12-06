@@ -78,8 +78,10 @@ a {
 
 .daily-schedule-card {
   @apply flex w-80 flex-col gap-4
-    rounded-2xl border bg-white p-6 shadow-sm;
+    rounded-2xl border p-6 shadow-sm;
+  background-color: var(--tan-100);
   border-color: var(--bluegrey-200);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .daily-schedule-title {
@@ -139,6 +141,7 @@ a {
   @apply w-full rounded-xl border px-4 py-3 text-left transition
     focus:outline-none focus-visible:ring-2
     focus-visible:ring-[var(--blue-400)] focus-visible:ring-offset-2;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
 .sidebar-list-item-selected {
@@ -188,7 +191,8 @@ a {
 
 .page-placeholder {
   @apply flex flex-1 items-center justify-center
-    rounded-2xl border bg-white p-8;
+    rounded-2xl border p-8;
+  background-color: var(--tan-100);
   border-color: var(--bluegrey-200);
   color: var(--coolgrey-500);
 }
@@ -206,6 +210,7 @@ a {
     rounded-2xl border p-5;
   border-color: var(--bluegrey-200);
   background-color: var(--bluegrey-100);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .email-header-label {
@@ -230,8 +235,10 @@ a {
 
 .email-body {
   @apply mt-2 flex-1 overflow-auto
-    rounded-xl bg-white p-5
-    text-sm leading-relaxed shadow-inner;
+    rounded-xl border p-5
+    text-sm leading-relaxed;
+  background-color: var(--tan-100);
+  border-color: var(--bluegrey-200);
   color: var(--coolgrey-700);
 }
 
@@ -254,14 +261,16 @@ a {
 .schedule-form-section {
   @apply flex flex-1 flex-col gap-6
     rounded-2xl border p-6;
-  border-color: var(--bluegrey-200);
+  border-color: var(--bluegrey-300);
   background-color: var(--blue-100);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-fieldset {
   @apply rounded-2xl border p-4;
   border-color: var(--bluegrey-200);
   background-color: var(--coolgrey-100);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-legend {
@@ -275,9 +284,10 @@ a {
 
 .schedule-radio-label {
   @apply flex h-full items-center gap-3
-    rounded-xl border border-transparent bg-white
+    rounded-xl border border-transparent
     px-4 py-3 text-sm font-semibold shadow-sm transition
     focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2;
+  background-color: var(--tan-100);
   color: var(--blue-600);
 }
 
@@ -311,10 +321,12 @@ a {
 
 .schedule-submit-button {
   @apply mt-auto flex w-full items-center justify-center
-    rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-sm transition
+    rounded-xl px-6 py-3 text-sm font-semibold transition
     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
     disabled:cursor-not-allowed disabled:opacity-50;
+  color: var(--tan-100);
   background-color: var(--blue-600);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
 .schedule-submit-button:hover {
@@ -329,13 +341,16 @@ a {
 /* Schedule History Page */
 .history-back-button {
   @apply inline-flex w-fit items-center gap-2
+    rounded-xl border border-transparent px-4 py-2
     text-sm font-semibold transition
     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  background-color: var(--tan-100);
   color: var(--blue-600);
 }
 
 .history-back-button:hover {
-  color: var(--blue-500);
+  border-color: var(--blue-300);
+  background-color: var(--blue-100);
 }
 
 .history-back-button:focus-visible {
@@ -348,6 +363,7 @@ a {
     rounded-2xl border p-4 shadow-sm;
   border-color: var(--bluegrey-200);
   background-color: var(--tan-100);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .history-scroll-container {
@@ -364,10 +380,12 @@ a {
 
 .schedule-secondary-button {
   @apply inline-flex w-full items-center justify-center
-    rounded-xl border border-transparent bg-white
-    px-5 py-3 text-sm font-semibold shadow-sm transition
+    rounded-xl border border-transparent
+    px-5 py-3 text-sm font-semibold transition
     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  background-color: var(--tan-100);
   color: var(--blue-600);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
 .schedule-secondary-button:hover {
@@ -379,4 +397,123 @@ a {
 .schedule-secondary-button:focus-visible {
   --tw-ring-color: var(--blue-300);
   --tw-ring-offset-color: var(--coolgrey-100);
+}
+
+/* App.tsx Styles */
+
+.signing-message-container {
+  @apply flex min-h-screen items-center justify-center text-lg;
+  background-color: var(--tan-100);
+  color: var(--coolgrey-600);
+}
+
+.home-card {
+  @apply flex flex-col gap-6 rounded-3xl border p-8 text-left shadow-sm;
+  border-color: var(--bluegrey-200);
+  background-color: var(--tan-100);
+}
+
+.home-title {
+  @apply text-2xl font-semibold;
+  color: var(--blue-700);
+}
+
+.home-subtitle {
+  @apply mt-2 text-sm;
+  color: var(--coolgrey-500);
+}
+
+.home-action-grid {
+  @apply grid gap-6 sm:grid-cols-2 xl:grid-cols-3;
+}
+
+.home-action-button {
+  @apply inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold transition
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  background-color: var(--blue-500);
+  color: var(--tan-100);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-action-button:hover {
+  background-color: var(--blue-400);
+}
+
+.home-action-button:focus-visible {
+  --tw-ring-color: var(--blue-300);
+  --tw-ring-offset-color: var(--tan-100);
+}
+
+.app-container {
+  @apply flex min-h-screen flex-col;
+  background-color: var(--tan-100);
+  color: var(--coolgrey-700);
+}
+
+.login-page-content {
+  @apply flex flex-1 flex-col items-center justify-center gap-6 px-4 text-center sm:px-8;
+}
+
+.login-title {
+  @apply text-3xl font-semibold tracking-tight;
+  color: var(--blue-700);
+}
+
+.login-button {
+  @apply rounded-xl px-6 py-3 text-base font-semibold transition
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  background-color: var(--blue-500);
+  color: var(--tan-100);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+.login-button:hover {
+  background-color: var(--blue-400);
+}
+
+.login-button:focus-visible {
+  --tw-ring-color: var(--blue-300);
+  --tw-ring-offset-color: var(--tan-100);
+}
+
+.app-content {
+  @apply flex flex-1 flex-col px-4 py-8 sm:px-8;
+}
+
+.app-header {
+  @apply flex flex-col gap-4 rounded-3xl border p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between;
+  border-color: var(--bluegrey-200);
+  background-color: var(--tan-200);
+}
+
+.app-header-user-label {
+  @apply text-xs font-medium uppercase tracking-wide;
+  color: var(--coolgrey-500);
+}
+
+.app-header-user-name {
+  @apply text-lg font-semibold;
+  color: var(--blue-700);
+}
+
+.app-logout-button {
+  @apply inline-flex items-center justify-center rounded-xl border border-transparent px-4 py-2 text-sm font-semibold transition
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  background-color: var(--tan-100);
+  color: var(--blue-600);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+.app-logout-button:hover {
+  border-color: var(--blue-300);
+  background-color: var(--blue-100);
+}
+
+.app-logout-button:focus-visible {
+  --tw-ring-color: var(--blue-300);
+  --tw-ring-offset-color: var(--tan-200);
+}
+
+.app-main {
+  @apply mt-8 flex-1 pb-8;
 }

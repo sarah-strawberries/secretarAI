@@ -55,6 +55,13 @@ export function ScheduleGeneratorPage() {
 
   return (
     <div className="page-container-full">
+      <button
+        type="button"
+        className="history-back-button"
+        onClick={() => navigate("/")}
+      >
+        &lt; Back
+      </button>
       <h1 className="page-title">Schedule Generator</h1>
       <div className="schedule-generator-layout">
         <SidebarList title="Today" items={listItems} selectedId={selectedItemId} onSelect={setSelectedItemId} />

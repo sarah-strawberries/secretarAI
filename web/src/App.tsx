@@ -11,7 +11,7 @@ import { TasksPage } from "./pages/TasksPage";
 
 function SigningMessage({ message }: { message: string }) {
     return (
-        <div className="flex min-h-screen items-center justify-center bg-[var(--tan-100)] text-lg text-[var(--coolgrey-600)]">
+        <div className="signing-message-container">
             {message}
         </div>
     );
@@ -26,21 +26,21 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
         { path: "/notes", label: "Notes" },
         { path: "/legalese-summarizer", label: "Legalese Summarizer" },
         { path: "/calendar", label: "Calendar" },
-    ];;/
+    ];
 
     return (
-        <section className="flex flex-col gap-6 rounded-3xl border border-[var(--bluegrey-200)] bg-white p-8 text-left shadow-sm">
+        <section className="home-card">
             <div>
-                <h1 className="text-2xl font-semibold text-[var(--blue-700)]">Why hello there, {displayName}.</h1>
-                <p className="mt-2 text-sm text-[var(--coolgrey-500)]">How can I help your day run more smoothly today?</p>
+                <h1 className="home-title">Why hello there, {displayName}.</h1>
+                <p className="home-subtitle">How can I help your day run more smoothly?</p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="home-action-grid">
                 {actions.map(({ path, label }) => (
                     <button
                         key={path}
                         type="button"
                         onClick={() => navigate(path)}
-                        className="inline-flex items-center justify-center rounded-xl bg-[var(--blue-500)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--blue-400)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                        className="home-action-button"
                     >
                         {label}
                     </button>
@@ -72,14 +72,14 @@ function App() {
 
     if (!auth.isAuthenticated) {
         return (
-            <div className="flex min-h-screen flex-col bg-[var(--tan-100)] text-[var(--coolgrey-700)]">
+            <div className="app-container">
                 <GlobalHeader />
-                <div className="flex flex-1 flex-col items-center justify-center gap-6 px-4 text-center sm:px-8">
-                    <h1 className="text-3xl font-semibold tracking-tight text-[var(--blue-700)]">secretarAI</h1>
+                <div className="login-page-content">
+                    <h1 className="login-title">secretarAI</h1>
                     <button
                         type="button"
                         onClick={() => void auth.signinRedirect()}
-                        className="rounded-xl bg-[var(--blue-500)] px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[var(--blue-400)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--tan-100)]"
+                        className="login-button"
                     >
                         Log in
                     </button>
@@ -91,23 +91,23 @@ function App() {
     const displayName = auth.user?.profile.name ?? "there";
 
     return (
-        <div className="flex min-h-screen flex-col bg-[var(--tan-100)] text-[var(--coolgrey-700)]">
+        <div className="app-container">
             <GlobalHeader />
-            <div className="flex flex-1 flex-col px-4 py-8 sm:px-8">
-                <header className="flex flex-col gap-4 rounded-3xl border border-[var(--bluegrey-200)] bg-[var(--tan-200)] p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+            <div className="app-content">
+                <header className="app-header">
                     <div>
-                        <p className="text-xs font-medium uppercase tracking-wide text-[var(--coolgrey-500)]">Signed in as</p>
-                        <p className="text-lg font-semibold text-[var(--blue-700)]">{displayName}</p>
+                        <p className="app-header-user-label">Signed in as</p>
+                        <p className="app-header-user-name">{displayName}</p>
                     </div>
                     <button
                         type="button"
                         onClick={() => void auth.signoutRedirect()}
-                        className="inline-flex items-center justify-center rounded-xl border border-transparent bg-white px-4 py-2 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-100)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--tan-200)]"
+                        className="app-logout-button"
                     >
                         Log out
                     </button>
                 </header>
-                <main className="mt-8 flex-1 pb-8">
+                <main className="app-main">
                     <Routes>
                         <Route path="/" element={<AuthenticatedHome displayName={displayName} />} />
                         <Route path="/emails" element={<EmailManagementPage />} />

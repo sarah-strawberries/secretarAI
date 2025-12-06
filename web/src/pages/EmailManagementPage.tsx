@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SidebarList, type SidebarListItem } from "../components/SidebarList";
 
 type Email = {
@@ -41,6 +42,7 @@ function formatDisplayDate(iso: string) {
 }
 
 export function EmailManagementPage() {
+  const navigate = useNavigate();
   const [selectedEmailId, setSelectedEmailId] = useState<string>(EMAILS[0]?.id ?? "");
 
   const selectedEmail = useMemo(() => EMAILS.find((email) => email.id === selectedEmailId) ?? EMAILS[0], [selectedEmailId]);
@@ -64,6 +66,13 @@ export function EmailManagementPage() {
 
   return (
     <div className="page-container-full">
+      <button
+        type="button"
+        className="history-back-button"
+        onClick={() => navigate("/")}
+      >
+        &lt; Back
+      </button>
       <h1 className="page-title">Email Management</h1>
       <div className="email-layout">
         <SidebarList title="Inbox" items={emailListItems} selectedId={selectedEmail.id} onSelect={setSelectedEmailId} />
