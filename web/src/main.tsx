@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import './index.css'
 import App from './App.tsx'
-import { createSafeStorage } from './services/safeStorage.ts';
+import { tokenStorage } from './services/tokenStorage.ts';
 
 Log.setLogger(console);
 Log.setLevel(Log.INFO);
@@ -21,8 +21,8 @@ const oidcConfig = {
   extraQueryParams: { kc_idp_hint: "google" },
 };
 
-const userStore = new WebStorageStateStore({ store: createSafeStorage() });
-const stateStore = new WebStorageStateStore({ store: createSafeStorage() });
+const userStore = new WebStorageStateStore({ store: tokenStorage() });
+const stateStore = new WebStorageStateStore({ store: tokenStorage() });
 
 const onSigninCallback = () => {
   window.history.replaceState({}, document.title, "/")

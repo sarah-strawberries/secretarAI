@@ -1,4 +1,4 @@
-export function createSafeStorage(): Storage {
+export function tokenStorage(): Storage {
   if (typeof window === 'undefined') {
     const memory = new Map<string, string>();
     const fallback = {
