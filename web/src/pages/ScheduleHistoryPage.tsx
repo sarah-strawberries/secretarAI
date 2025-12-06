@@ -82,19 +82,19 @@ export function ScheduleHistoryPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-[28rem] flex-1 flex-col gap-4">
+    <div className="page-container-full">
       <button
         type="button"
-        className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--blue-600)] transition hover:text-[var(--blue-500)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--tan-100)]"
+        className="history-back-button"
         onClick={() => navigate("/schedule")}
       >
         &lt; Back
       </button>
-      <h1 className="text-2xl font-semibold text-[var(--blue-700)]">Schedule History</h1>
-      <section className="flex flex-1 flex-col rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--tan-100)] p-4 shadow-sm">
-        <div className="flex-1 min-h-0">
-          <div className="h-full overflow-x-auto overflow-y-hidden pr-2">
-            <div className="grid h-full grid-flow-col auto-rows-max content-start gap-4">
+      <h1 className="page-title">Schedule History</h1>
+      <section className="history-section">
+        <div className="history-scroll-container">
+          <div className="history-scroll-area">
+            <div className="history-grid">
             {schedules.map((schedule) => (
               <DailySchedule
                 key={schedule.id}

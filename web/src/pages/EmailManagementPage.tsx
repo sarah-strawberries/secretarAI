@@ -56,28 +56,28 @@ export function EmailManagementPage() {
 
   if (!selectedEmail) {
     return (
-      <div className="flex min-h-[24rem] items-center justify-center rounded-xl border border-[var(--bluegrey-200)] bg-[var(--tan-200)] p-6 text-[var(--coolgrey-600)]">
+      <div className="email-empty-state">
         No emails to display.
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-[28rem] flex-1 flex-col gap-4">
-      <h1 className="text-2xl font-semibold text-[var(--blue-700)]">Email Management</h1>
-      <div className="flex flex-1 flex-col gap-4 rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--tan-100)] p-4 shadow-sm sm:flex-row">
+    <div className="page-container-full">
+      <h1 className="page-title">Email Management</h1>
+      <div className="email-layout">
         <SidebarList title="Inbox" items={emailListItems} selectedId={selectedEmail.id} onSelect={setSelectedEmailId} />
-        <section className="flex flex-1 flex-col gap-3 rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--bluegrey-100)] p-5">
+        <section className="email-detail-section">
           <header className="space-y-1">
-            <p className="text-xs font-medium uppercase tracking-wide text-[var(--coolgrey-500)]">Subject</p>
-            <h2 className="text-xl font-semibold text-[var(--blue-700)]">{selectedEmail.subject}</h2>
+            <p className="email-header-label">Subject</p>
+            <h2 className="email-subject">{selectedEmail.subject}</h2>
           </header>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--coolgrey-500)]">
+          <div className="email-meta">
             <span>From {selectedEmail.sender}</span>
-            <span className="hidden h-2 w-2 rounded-full bg-[var(--blue-400)] sm:inline-flex" aria-hidden="true" />
+            <span className="email-meta-dot" aria-hidden="true" />
             <span>{formatDisplayDate(selectedEmail.date)}</span>
           </div>
-          <article className="mt-2 flex-1 overflow-auto rounded-xl bg-white p-5 text-sm leading-relaxed text-[var(--coolgrey-700)] shadow-inner">
+          <article className="email-body">
             <pre className="whitespace-pre-wrap font-sans">{selectedEmail.body}</pre>
           </article>
         </section>

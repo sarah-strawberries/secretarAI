@@ -14,9 +14,9 @@ type SidebarListProps = {
 
 export function SidebarList({ title, items, selectedId, onSelect }: SidebarListProps) {
     return (
-        <section className="w-full shrink-0 space-y-3 sm:w-72">
-            <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--coolgrey-500)]">{title}</h2>
-            <div className="space-y-2">
+        <section className="sidebar-list-section">
+            <h2 className="sidebar-list-title">{title}</h2>
+            <div className="sidebar-list-container">
                 {items.map((item) => {
                     const isSelected = item.id === selectedId;
                     return (
@@ -24,15 +24,15 @@ export function SidebarList({ title, items, selectedId, onSelect }: SidebarListP
                             key={item.id}
                             type="button"
                             onClick={() => onSelect(item.id)}
-                            className={`w-full rounded-xl border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-400)] focus-visible:ring-offset-2 ${
+                            className={`sidebar-list-item ${
                                 isSelected
-                                    ? "border-[var(--blue-400)] bg-[var(--blue-100)] text-[var(--blue-700)]"
-                                    : "border-transparent bg-[var(--tan-200)] text-[var(--coolgrey-600)] hover:border-[var(--bluegrey-300)] hover:bg-[var(--bluegrey-100)]"
+                                    ? "sidebar-list-item-selected"
+                                    : "sidebar-list-item-default"
                             }`}
                         >
-                            <p className="text-sm font-semibold leading-snug">{item.title}</p>
-                            {item.subtitle ? <p className="mt-1 text-xs text-[var(--coolgrey-400)]">{item.subtitle}</p> : null}
-                            {item.description ? <p className="mt-1 text-xs text-[var(--coolgrey-500)]">{item.description}</p> : null}
+                            <p className="sidebar-list-item-title">{item.title}</p>
+                            {item.subtitle ? <p className="sidebar-list-item-subtitle">{item.subtitle}</p> : null}
+                            {item.description ? <p className="sidebar-list-item-description">{item.description}</p> : null}
                         </button>
                     );
                 })}

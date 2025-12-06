@@ -16,29 +16,29 @@ export function DailySchedule({ dateLabel, year, items, bulletStyle = "classic" 
   const isCheckbox = bulletStyle === "checkbox";
 
   return (
-    <article className="flex w-80 flex-col gap-4 rounded-2xl border border-[var(--bluegrey-200)] bg-white p-6 shadow-sm">
+    <article className="daily-schedule-card">
       <header className="space-y-1">
-        <h3 className="text-lg font-semibold text-[var(--blue-700)]">{dateLabel}</h3>
-        <p className="text-sm text-[var(--coolgrey-500)]">{year}</p>
+        <h3 className="daily-schedule-title">{dateLabel}</h3>
+        <p className="daily-schedule-year">{year}</p>
       </header>
       {isCheckbox ? (
-        <ul className="space-y-3">
+        <ul className="daily-schedule-list-checkbox">
           {items.map((item) => (
-            <li key={item.id} className="flex items-start gap-3 text-sm text-[var(--coolgrey-600)]">
-              <input type="checkbox" className="mt-1 h-4 w-4 rounded border-[var(--bluegrey-300)] text-[var(--blue-500)] focus:ring-[var(--blue-400)]" aria-hidden="true" disabled />
+            <li key={item.id} className="daily-schedule-item-checkbox">
+              <input type="checkbox" className="daily-schedule-checkbox" aria-hidden="true" disabled />
               <div>
-                <p className="text-[var(--coolgrey-700)]"><span className="font-semibold">{item.startTime}</span> - {item.label}</p>
-                {item.description ? <p className="text-xs text-[var(--coolgrey-500)]">{item.description}</p> : null}
+                <p className="daily-schedule-text"><span className="font-semibold">{item.startTime}</span> - {item.label}</p>
+                {item.description ? <p className="daily-schedule-description">{item.description}</p> : null}
               </div>
             </li>
           ))}
         </ul>
       ) : (
-        <ul className="list-disc space-y-3 pl-6 text-sm text-[var(--coolgrey-600)]">
+        <ul className="daily-schedule-list-classic">
           {items.map((item) => (
             <li key={item.id}>
-              <p className="text-[var(--coolgrey-700)]"><span className="font-semibold">{item.startTime}</span> - {item.label}</p>
-              {item.description ? <p className="text-xs text-[var(--coolgrey-500)]">{item.description}</p> : null}
+              <p className="daily-schedule-text"><span className="font-semibold">{item.startTime}</span> - {item.label}</p>
+              {item.description ? <p className="daily-schedule-description">{item.description}</p> : null}
             </li>
           ))}
         </ul>

@@ -54,64 +54,64 @@ export function ScheduleGeneratorPage() {
   );
 
   return (
-    <div className="flex min-h-[28rem] flex-1 flex-col gap-4">
-      <h1 className="text-2xl font-semibold text-[var(--blue-700)]">Schedule Generator</h1>
-      <div className="flex flex-1 flex-col gap-4 rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--tan-100)] p-4 shadow-sm sm:flex-row">
+    <div className="page-container-full">
+      <h1 className="page-title">Schedule Generator</h1>
+      <div className="schedule-generator-layout">
         <SidebarList title="Today" items={listItems} selectedId={selectedItemId} onSelect={setSelectedItemId} />
-        <section className="flex flex-1 flex-col gap-6 rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--blue-100)] p-6">
+        <section className="schedule-form-section">
           <header className="space-y-1">
-            <p className="text-xs font-medium uppercase tracking-wide text-[var(--coolgrey-500)]">Schedule Builder</p>
-            <h2 className="text-xl font-semibold text-[var(--blue-700)]">Generate a Schedule</h2>
+            <p className="email-header-label">Schedule Builder</p>
+            <h2 className="email-subject">Generate a Schedule</h2>
           </header>
           <form className="flex flex-col gap-6" aria-label="Generate a Schedule">
-            <div className="rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--coolgrey-100)] p-4">
+            <div className="schedule-fieldset">
               <fieldset className="space-y-3">
-                <legend className="text-sm font-medium text-[var(--coolgrey-600)]">Choose a bullet style for your daily tasks</legend>
-                <div className="grid grid-cols-2 gap-3">
-                  <label className="flex h-full items-center gap-3 rounded-xl border border-transparent bg-white px-4 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-300)] hover:text-[var(--blue-700)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--blue-300)] focus-within:ring-offset-2 focus-within:ring-offset-[var(--coolgrey-100)]">
+                <legend className="schedule-legend">Choose a bullet style for your daily tasks</legend>
+                <div className="schedule-radio-group">
+                  <label className="schedule-radio-label">
                     <input
                       type="radio"
                       name="bulletStyle"
                       value="checkbox"
                       checked={bulletStyle === "checkbox"}
                       onChange={() => setBulletStyle("checkbox")}
-                      className="h-4 w-4 border-[var(--bluegrey-300)] text-[var(--blue-500)] focus:ring-[var(--blue-400)]"
+                      className="schedule-radio-input"
                     />
                     Checkbox
                   </label>
-                  <label className="flex h-full items-center gap-3 rounded-xl border border-transparent bg-white px-4 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-300)] hover:text-[var(--blue-700)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--blue-300)] focus-within:ring-offset-2 focus-within:ring-offset-[var(--coolgrey-100)]">
+                  <label className="schedule-radio-label">
                     <input
                       type="radio"
                       name="bulletStyle"
                       value="classic"
                       checked={bulletStyle === "classic"}
                       onChange={() => setBulletStyle("classic")}
-                      className="h-4 w-4 border-[var(--bluegrey-300)] text-[var(--blue-500)] focus:ring-[var(--blue-400)]"
+                      className="schedule-radio-input"
                     />
                     Classic
                   </label>
                 </div>
               </fieldset>
-              <label className="mt-6 flex items-center gap-3 text-sm text-[var(--coolgrey-600)]">
+              <label className="schedule-checkbox-label">
                 <input
                   type="checkbox"
                   checked={autoIncludeTodos}
                   onChange={(event) => setAutoIncludeTodos(event.target.checked)}
-                  className="h-4 w-4 rounded border-[var(--bluegrey-300)] text-[var(--blue-500)] focus:ring-[var(--blue-400)]"
+                  className="schedule-checkbox-input"
                 />
                 Auto-include to-dos?
               </label>
               <button
                 type="button"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-white px-5 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-300)] hover:text-[var(--blue-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--coolgrey-100)]"
+                className="mt-6 schedule-secondary-button"
               >
                 Generate Schedule (this feature coming soon!)
               </button>
             </div>
-            <div className="rounded-2xl border border-[var(--bluegrey-200)] bg-[var(--coolgrey-100)] p-4">
+            <div className="schedule-fieldset">
               <button
                 type="button"
-                className="inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-white px-5 py-3 text-sm font-semibold text-[var(--blue-600)] shadow-sm transition hover:border-[var(--blue-300)] hover:bg-[var(--blue-300)] hover:text-[var(--blue-700)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-300)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--coolgrey-100)]"
+                className="schedule-secondary-button"
                 onClick={() => navigate("/schedule-history")}
               >
                 View Past Schedules
