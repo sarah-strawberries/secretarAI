@@ -64,7 +64,7 @@ jobs:
           context: ./web
           file: ./web/Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           tags: |
             sarahstrawberries/secretarai-web:${{ needs.set-metadata.outputs.TAG }}
 
@@ -102,7 +102,7 @@ jobs:
           context: ./api
           file: ./api/Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           tags: |
             sarahstrawberries/secretarai-api:${{ needs.set-metadata.outputs.TAG }}
 

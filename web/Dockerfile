@@ -1,4 +1,4 @@
-FROM node:20 AS builder
+FROM node:22-alpine AS builder
 
 ARG VITE_OIDC_AUTHORITY=https://auth-dev.snowse.io/realms/secretarai
 ARG VITE_OIDC_CLIENT_ID=secretarai-client
