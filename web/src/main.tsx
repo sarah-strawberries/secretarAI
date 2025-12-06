@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import './index.css'
 import App from './App.tsx'
-import { createSafeStorage } from './services/storage.ts';
+import { createSafeStorage } from './services/safeStorage.ts';
 
 Log.setLogger(console);
 Log.setLevel(Log.INFO);

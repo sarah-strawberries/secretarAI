@@ -41,10 +41,9 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
                         key={path}
                         type="button"
                         onClick={() => navigate(path)}
-                        className="home-action-button flex flex-col items-center justify-center gap-2"
-                    >
-                        <img src={icon} alt={`${label} icon`} className="h-8 w-8" />
-                        {label}
+                        className="home-action-button flex flex-col items-center justify-center gap-2">
+                            <img src={icon} alt={`${label} icon`} className="h-8 w-8" />
+                            {label}
                     </button>
                 ))}
             </div>
