@@ -26,7 +26,7 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
         { path: "/notes", label: "Notes" },
         { path: "/legalese-summarizer", label: "Legalese Summarizer" },
         { path: "/calendar", label: "Calendar" },
-    ];
+    ];;/
 
     return (
         <section className="flex flex-col gap-6 rounded-3xl border border-[var(--bluegrey-200)] bg-white p-8 text-left shadow-sm">
