@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: sarahstrawberries/secretarai-web:20251206-e4bdfe7
+        image: sarahstrawberries/secretarai-web:${TAG}
         ports:
         - containerPort: 80
 ---

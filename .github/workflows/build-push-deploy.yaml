@@ -130,12 +130,11 @@ jobs:
           TAG: ${{ needs.set-metadata.outputs.TAG }}
         run: |
           echo "Applying manifests to secretarai namespace with TAG=$TAG"
-          echo "Checking substituted YAML for frontend:"
-          cat kube/web.yaml | envsubst | grep image:
-
-          for FILE in kube/*; do
+          
+          # Use envsubst to replace ${TAG} in the yaml files and apply them
+          for FILE in kube/*.yaml; do
             echo "Applying $FILE"
-            cat $FILE | envsubst | kubectl apply -n secretarai -f -
+            envsubst < $FILE | kubectl apply -n secretarai -f -
           done
 
       - name: Verify deployment
