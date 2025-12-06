@@ -36,7 +36,7 @@ export interface MessageContextValue {
   conversations: { id: number; title?: string | null | undefined }[];
   conversationsLoading: boolean;
   conversationId: number | null;
-  createConversationMutation: UseMutationResult<number, Error, CreateConversationArgs | void>;
+  createConversationMutation: UseMutationResult<number, Error, CreateConversationArgs | undefined>;
   selectConversation: (id: number) => Promise<void>;
   resetChat: () => void;
 }

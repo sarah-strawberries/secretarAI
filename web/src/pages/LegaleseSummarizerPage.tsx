@@ -14,7 +14,7 @@ export function LegaleseSummarizerPage() {
                 &lt; Back
             </button>
             <h1 className="page-title">Legalese Summarizer</h1>
-            <div className="mt-8 max-w-4xl mx-auto">
+            <div className="mt-8">
                 <ChatComponent jobContext={JobContext.LegaleseSummarization} />
             </div>
         </div>

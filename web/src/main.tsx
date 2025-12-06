@@ -35,7 +35,25 @@ createRoot(document.getElementById('root')!).render(
         <MessageProvider>
           <BrowserRouter>
             <App />
-            <Toaster />
+            <Toaster
+              toastOptions={{
+                className: 'toast-base',
+                error: {
+                  className: 'toast-error',
+                  iconTheme: {
+                    primary: 'var(--tan-800)',
+                    secondary: 'var(--tan-100)',
+                  },
+                },
+                success: {
+                  className: 'toast-success',
+                  iconTheme: {
+                    primary: 'var(--blue-500)',
+                    secondary: 'var(--tan-100)',
+                  },
+                },
+              }}
+            />
           </BrowserRouter>
         </MessageProvider>
       </QueryClientProvider>

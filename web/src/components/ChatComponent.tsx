@@ -31,7 +31,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ jobContext }) => {
   };
 
   return (
-    <div className="flex flex-col h-[600px] bg-[var(--tan-100)] rounded-lg shadow-lg overflow-hidden border border-[var(--tan-300)]">
+    <div className="flex flex-col h-[600px] w-2/3 mx-auto bg-[var(--tan-100)] rounded-lg shadow-lg overflow-hidden border border-[var(--tan-300)]">
       <div className="flex-1 overflow-y-auto p-6 scroll-smooth">
         <div className="flex flex-col space-y-4">
           {chat.map((msg, i) => {
