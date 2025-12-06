@@ -1,10 +1,13 @@
 # GitHub Copilot Instructions
 When generating code, please follow these guidelines:
 
+## General Instructions
+Don't add or remove any functionality unless explicitly instructed to do so, or unless the user gives permission before you do it.
+
 ## Error Handling
 Do not swallow errors; let them get thrown, and leave it to the developer to handle them.
 
-# Styling
+## Styling
 Use Tailwind CSS for styling components.
 Store all colors in CSS variables in the web app.
 
