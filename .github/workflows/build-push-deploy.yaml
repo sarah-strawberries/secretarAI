@@ -1,0 +1,148 @@
+name: Build & Push Docker Images, Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # Create docker image tag so it can be shared across jobs
+  set-metadata:
+    runs-on: ubuntu-latest
+    outputs:
+      TAG: ${{ steps.meta.outputs.TAG }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract metadata for tagging
+        id: meta
+        run: |
+          TAG=$(date +'%Y%m%d')-${GITHUB_SHA::7}
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+  # Build client in parallel
+  build-web:
+    runs-on: ubuntu-latest
+    needs: set-metadata
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Install web dependencies
+        working-directory: ./web
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint web
+        working-directory: ./web
+        run: pnpm lint
+
+      - name: Test web
+        working-directory: ./web
+        run: pnpm test -- --run
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push web image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./web
+          file: ./web/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            sarahstrawberries/secretarai-web:${{ needs.set-metadata.outputs.TAG }}
+
+  # Build api in parallel
+  build-api:
+    runs-on: ubuntu-latest
+    needs: set-metadata
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Lint api
+        run: dotnet format --verify-no-changes
+
+      - name: Test api
+        run: dotnet test api-tests/api-tests.csproj
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push server image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./api
+          file: ./api/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            sarahstrawberries/secretarai-api:${{ needs.set-metadata.outputs.TAG }}
+
+  deploy:
+    runs-on: self-hosted
+    needs: [set-metadata, build-web, build-api]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set environment variables
+        run: |
+          echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
+          echo "TAG=${{ needs.set-metadata.outputs.TAG }}" >> $GITHUB_ENV
+          echo "Deploying with tag: $TAG"
+
+      - name: Ensure kubectl works
+        run: |
+          echo "Using kubeconfig: $KUBECONFIG"
+          kubectl version --client
+          kubectl get namespace secretarai || true
+
+      - name: Deploy to Kubernetes
+        env:
+          TAG: ${{ needs.set-metadata.outputs.TAG }}
+        run: |
+          echo "Applying manifests to secretarai namespace with TAG=$TAG"
+          echo "Checking substituted YAML for frontend:"
+          cat kube/web.yaml | envsubst | grep image:
+
+          for FILE in kube/*; do
+            echo "Applying $FILE"
+            cat $FILE | envsubst | kubectl apply -n secretarai -f -
+          done
+
+      - name: Verify deployment
+        run: |
+          kubectl get pods -n secretarai
+          kubectl get svc -n secretarai
