@@ -5,11 +5,11 @@ When generating code, please follow these guidelines:
 Don't add or remove any functionality unless explicitly instructed to do so, or unless the user gives permission before you do it.
 
 ## Error Handling
-Do not swallow errors; let them get thrown, and leave it to the developer to handle them.
+Do not swallow errors in try/catch blocks; let them get thrown, and leave it to the developer to handle them.
 
 ## Styling
 Use Tailwind CSS for styling components.
-Store all colors in CSS variables in the web app.
+Store all colors in CSS variables in the web app. Do not use black or white for any colors; use the appropriate CSS variable instead.
 
 ## Code Quality
 Promote clean code by deleting commented-out code (if it doesn't explicitly say not to) and unused imports.
