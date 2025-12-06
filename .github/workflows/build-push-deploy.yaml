@@ -1,4 +1,4 @@
-name: Build & Push Docker Images, Deploy to Kubernetes
+name: Build, Lint and Test, Push Docker Images, Deploy to Kubernetes
 
 on:
   push:
