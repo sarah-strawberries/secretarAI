@@ -9,7 +9,7 @@ on:
 jobs:
   # Create docker image tag so it can be shared across jobs
   set-metadata:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       TAG: ${{ steps.meta.outputs.TAG }}
     steps:
@@ -25,7 +25,7 @@ jobs:
 
   # Build client in parallel
   build-web:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: set-metadata
     steps:
       - name: Checkout repository
@@ -70,7 +70,7 @@ jobs:
 
   # Build api in parallel
   build-api:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: set-metadata
     steps:
       - name: Checkout repository
