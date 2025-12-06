@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate, useLocation } from "react-router-dom";
 // Using local SVGs in public/icons instead of react-bootstrap-icons components
 import { useAppAuth } from "./hooks/useAppAuth";
 import { GlobalHeader } from "./components/GlobalHeader";
@@ -53,6 +53,8 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
 
 function App() {
     const auth = useAppAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     switch (auth.activeNavigator) {
         case "signinSilent":
@@ -71,7 +73,9 @@ function App() {
         return <SigningMessage message={`Oops... ${auth.error.message}`} />;
     }
 
-    if (!auth.isAuthenticated) {
+    const isLegalesePage = location.pathname === "/legalese-summarizer";
+
+    if (!auth.isAuthenticated && !isLegalesePage) {
         return (
             <div className="app-container">
                 <GlobalHeader />
@@ -83,6 +87,13 @@ function App() {
                         className="login-button"
                     >
                         Log in
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => navigate("/legalese-summarizer")}
+                        className="history-back-button"
+                    >
+                        I don't want to log in, but I'd like to use the Legalese Summarizer
                     </button>
                 </div>
             </div>
@@ -97,28 +108,46 @@ function App() {
             <div className="app-content">
                 <header className="app-header">
                     <div>
-                        <p className="app-header-user-label">Signed in as</p>
-                        <p className="app-header-user-name">{displayName}</p>
+                        {auth.isAuthenticated && (
+                            <>
+                                <p className="app-header-user-label">Signed in as</p>
+                                <p className="app-header-user-name">{displayName}</p>
+                            </>
+                        )}
                     </div>
-                    <button
-                        type="button"
-                        onClick={() => void auth.signoutRedirect()}
-                        className="app-logout-button"
-                    >
-                        Log out
-                    </button>
+                    {auth.isAuthenticated ? (
+                        <button
+                            type="button"
+                            onClick={() => void auth.signoutRedirect()}
+                            className="app-logout-button"
+                        >
+                            Log out
+                        </button>
+                    ) : (
+                        <button
+                            type="button"
+                            onClick={() => void auth.signinRedirect()}
+                            className="app-logout-button"
+                        >
+                            Log in
+                        </button>
+                    )}
                 </header>
                 <main className="app-main">
                     <Routes>
-                        <Route path="/" element={<AuthenticatedHome displayName={displayName} />} />
-                        <Route path="/emails" element={<EmailManagementPage />} />
-                        <Route path="/schedule" element={<ScheduleGeneratorPage />} />
-                        <Route path="/schedule-history" element={<ScheduleHistoryPage />} />
-                        <Route path="/tasks" element={<TasksPage />} />
-                        <Route path="/notes" element={<NotesPage />} />
                         <Route path="/legalese-summarizer" element={<LegaleseSummarizerPage />} />
-                        <Route path="/calendar" element={<CalendarPage />} />
-                        <Route path="*" element={<Navigate to="/" replace />} />
+                        {auth.isAuthenticated && (
+                            <>
+                                <Route path="/" element={<AuthenticatedHome displayName={displayName} />} />
+                                <Route path="/emails" element={<EmailManagementPage />} />
+                                <Route path="/schedule" element={<ScheduleGeneratorPage />} />
+                                <Route path="/schedule-history" element={<ScheduleHistoryPage />} />
+                                <Route path="/tasks" element={<TasksPage />} />
+                                <Route path="/notes" element={<NotesPage />} />
+                                <Route path="/calendar" element={<CalendarPage />} />
+                            </>
+                        )}
+                        <Route path="*" element={<Navigate to={auth.isAuthenticated ? "/" : "/legalese-summarizer"} replace />} />
                     </Routes>
                 </main>
             </div>
