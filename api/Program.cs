@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(options =>
         {
             var dbService = context.HttpContext.RequestServices.GetRequiredService<DatabaseService>();
             var email = context.Principal?.FindFirst("email")?.Value;
-            
+
             if (!string.IsNullOrEmpty(email))
             {
                 await dbService.EnsureUserExistsAsync(email);

@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import "./App.css";
 import { useAppAuth } from "./hooks/useAppAuth";
 import { GlobalHeader } from "./components/GlobalHeader";
 import { CalendarPage } from "./pages/CalendarPage";
