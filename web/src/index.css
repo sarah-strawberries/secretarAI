@@ -63,3 +63,295 @@ body {
 a {
   color: inherit;
 }
+
+.global-header {
+  @apply flex items-center gap-4 px-4 py-6 sm:px-8;
+  background-color: var(--coolgrey-600);
+  color: var(--coolgrey-110);
+}
+
+.global-header-text {
+  @apply text-3xl font-semibold tracking-tight;
+  text-shadow: 1px 1px 0 var(--coolgrey-700);
+}
+
+.daily-schedule-card {
+  @apply flex w-80 flex-col gap-4 rounded-2xl border bg-white p-6 shadow-sm;
+  border-color: var(--bluegrey-200);
+}
+
+.daily-schedule-title {
+  @apply text-lg font-semibold;
+  color: var(--blue-700);
+}
+
+.daily-schedule-year {
+  @apply text-sm;
+  color: var(--coolgrey-500);
+}
+
+.daily-schedule-list-checkbox {
+  @apply space-y-3;
+}
+
+.daily-schedule-list-classic {
+  @apply list-disc space-y-3 pl-6 text-sm;
+  color: var(--coolgrey-600);
+}
+
+.daily-schedule-item-checkbox {
+  @apply flex items-start gap-3 text-sm;
+  color: var(--coolgrey-600);
+}
+
+.daily-schedule-checkbox {
+  @apply mt-1 h-4 w-4 rounded focus:ring-[var(--blue-400)];
+  border-color: var(--bluegrey-300);
+  color: var(--blue-500);
+}
+
+.daily-schedule-text {
+  color: var(--coolgrey-700);
+}
+
+.daily-schedule-description {
+  @apply text-xs;
+  color: var(--coolgrey-500);
+}
+
+.sidebar-list-section {
+  @apply w-full shrink-0 space-y-3 sm:w-72;
+}
+
+.sidebar-list-title {
+  @apply text-sm font-medium uppercase tracking-wide;
+  color: var(--coolgrey-500);
+}
+
+.sidebar-list-container {
+  @apply space-y-2;
+}
+
+.sidebar-list-item {
+  @apply w-full rounded-xl border px-4 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue-400)] focus-visible:ring-offset-2;
+}
+
+.sidebar-list-item-selected {
+  background-color: var(--blue-100);
+  border-color: var(--blue-400);
+  color: var(--blue-700);
+}
+
+.sidebar-list-item-default {
+  @apply border-transparent;
+  background-color: var(--tan-200);
+  color: var(--coolgrey-600);
+}
+
+.sidebar-list-item-default:hover {
+  background-color: var(--bluegrey-100);
+  border-color: var(--bluegrey-300);
+}
+
+.sidebar-list-item-title {
+  @apply text-sm font-semibold leading-snug;
+}
+
+.sidebar-list-item-subtitle {
+  @apply mt-1 text-xs;
+  color: var(--coolgrey-400);
+}
+
+.sidebar-list-item-description {
+  @apply mt-1 text-xs;
+  color: var(--coolgrey-500);
+}
+
+/* Common Page Styles */
+.page-container {
+  @apply flex min-h-[28rem] flex-col gap-4;
+}
+
+.page-container-full {
+  @apply flex min-h-[28rem] flex-1 flex-col gap-4;
+}
+
+.page-title {
+  @apply text-2xl font-semibold;
+  color: var(--blue-700);
+}
+
+.page-placeholder {
+  @apply flex flex-1 items-center justify-center rounded-2xl border bg-white p-8;
+  border-color: var(--bluegrey-200);
+  color: var(--coolgrey-500);
+}
+
+/* Email Management Page */
+.email-layout {
+  @apply flex flex-1 flex-col gap-4 rounded-2xl border p-4 shadow-sm sm:flex-row;
+  border-color: var(--bluegrey-200);
+  background-color: var(--tan-100);
+}
+
+.email-detail-section {
+  @apply flex flex-1 flex-col gap-3 rounded-2xl border p-5;
+  border-color: var(--bluegrey-200);
+  background-color: var(--bluegrey-100);
+}
+
+.email-header-label {
+  @apply text-xs font-medium uppercase tracking-wide;
+  color: var(--coolgrey-500);
+}
+
+.email-subject {
+  @apply text-xl font-semibold;
+  color: var(--blue-700);
+}
+
+.email-meta {
+  @apply flex flex-wrap items-center gap-3 text-sm;
+  color: var(--coolgrey-500);
+}
+
+.email-meta-dot {
+  @apply hidden h-2 w-2 rounded-full sm:inline-flex;
+  background-color: var(--blue-400);
+}
+
+.email-body {
+  @apply mt-2 flex-1 overflow-auto rounded-xl bg-white p-5 text-sm leading-relaxed shadow-inner;
+  color: var(--coolgrey-700);
+}
+
+.email-empty-state {
+  @apply flex min-h-[24rem] items-center justify-center rounded-xl border p-6;
+  border-color: var(--bluegrey-200);
+  background-color: var(--tan-200);
+  color: var(--coolgrey-600);
+}
+
+/* Schedule Generator Page */
+.schedule-generator-layout {
+  @apply flex flex-1 flex-col gap-4 rounded-2xl border p-4 shadow-sm sm:flex-row;
+  border-color: var(--bluegrey-200);
+  background-color: var(--tan-100);
+}
+
+.schedule-form-section {
+  @apply flex flex-1 flex-col gap-6 rounded-2xl border p-6;
+  border-color: var(--bluegrey-200);
+  background-color: var(--blue-100);
+}
+
+.schedule-fieldset {
+  @apply rounded-2xl border p-4;
+  border-color: var(--bluegrey-200);
+  background-color: var(--coolgrey-100);
+}
+
+.schedule-legend {
+  @apply text-sm font-medium;
+  color: var(--coolgrey-600);
+}
+
+.schedule-radio-group {
+  @apply grid grid-cols-2 gap-3;
+}
+
+.schedule-radio-label {
+  @apply flex h-full items-center gap-3 rounded-xl border border-transparent bg-white px-4 py-3 text-sm font-semibold shadow-sm transition focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2;
+  color: var(--blue-600);
+}
+
+.schedule-radio-label:hover {
+  border-color: var(--blue-300);
+  background-color: var(--blue-300);
+  color: var(--blue-700);
+}
+
+.schedule-radio-label:focus-within {
+  --tw-ring-color: var(--blue-300);
+  --tw-ring-offset-color: var(--coolgrey-100);
+}
+
+.schedule-radio-input {
+  @apply h-4 w-4 focus:ring-[var(--blue-400)];
+  border-color: var(--bluegrey-300);
+  color: var(--blue-500);
+}
+
+.schedule-checkbox-label {
+  @apply mt-6 flex items-center gap-3 text-sm;
+  color: var(--coolgrey-600);
+}
+
+.schedule-checkbox-input {
+  @apply h-4 w-4 rounded focus:ring-[var(--blue-400)];
+  border-color: var(--bluegrey-300);
+  color: var(--blue-500);
+}
+
+.schedule-submit-button {
+  @apply mt-auto flex w-full items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  background-color: var(--blue-600);
+}
+
+.schedule-submit-button:hover {
+  background-color: var(--blue-500);
+}
+
+.schedule-submit-button:focus-visible {
+  --tw-ring-color: var(--blue-400);
+  --tw-ring-offset-color: var(--blue-100);
+}
+
+/* Schedule History Page */
+.history-back-button {
+  @apply inline-flex w-fit items-center gap-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  color: var(--blue-600);
+}
+
+.history-back-button:hover {
+  color: var(--blue-500);
+}
+
+.history-back-button:focus-visible {
+  --tw-ring-color: var(--blue-300);
+  --tw-ring-offset-color: var(--tan-100);
+}
+
+.history-section {
+  @apply flex flex-1 flex-col rounded-2xl border p-4 shadow-sm;
+  border-color: var(--bluegrey-200);
+  background-color: var(--tan-100);
+}
+
+.history-scroll-container {
+  @apply flex-1 min-h-0;
+}
+
+.history-scroll-area {
+  @apply h-full overflow-x-auto overflow-y-hidden pr-2;
+}
+
+.history-grid {
+  @apply grid h-full grid-flow-col auto-rows-max content-start gap-4;
+}
+
+.schedule-secondary-button {
+  @apply inline-flex w-full items-center justify-center rounded-xl border border-transparent bg-white px-5 py-3 text-sm font-semibold shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  color: var(--blue-600);
+}
+
+.schedule-secondary-button:hover {
+  border-color: var(--blue-300);
+  background-color: var(--blue-300);
+  color: var(--blue-700);
+}
+
+.schedule-secondary-button:focus-visible {
+  --tw-ring-color: var(--blue-300);
+  --tw-ring-offset-color: var(--coolgrey-100);
+}
