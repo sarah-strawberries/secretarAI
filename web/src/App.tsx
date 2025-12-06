@@ -1,4 +1,12 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import {
+    CalendarDateFill,
+    CheckSquareFill,
+    ClockFill,
+    EnvelopeFill,
+    FileEarmarkTextFill,
+    JournalText,
+} from "react-bootstrap-icons";
 import { useAppAuth } from "./hooks/useAppAuth";
 import { GlobalHeader } from "./components/GlobalHeader";
 import { CalendarPage } from "./pages/CalendarPage";
@@ -20,12 +28,12 @@ function SigningMessage({ message }: { message: string }) {
 function AuthenticatedHome({ displayName }: { displayName: string }) {
     const navigate = useNavigate();
     const actions = [
-        { path: "/emails", label: "Email Management" },
-        { path: "/schedule", label: "Schedule Generator" },
-        { path: "/tasks", label: "Tasks" },
-        { path: "/notes", label: "Notes" },
-        { path: "/legalese-summarizer", label: "Legalese Summarizer" },
-        { path: "/calendar", label: "Calendar" },
+        { path: "/emails", label: "Email Management", icon: <EnvelopeFill /> },
+        { path: "/schedule", label: "Schedule Generator", icon: <ClockFill /> },
+        { path: "/tasks", label: "Tasks", icon: <CheckSquareFill /> },
+        { path: "/notes", label: "Notes", icon: <JournalText /> },
+        { path: "/legalese-summarizer", label: "Legalese Summarizer", icon: <FileEarmarkTextFill /> },
+        { path: "/calendar", label: "Calendar", icon: <CalendarDateFill /> },
     ];
 
     return (
@@ -35,13 +43,14 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
                 <p className="home-subtitle">How can I help your day run more smoothly?</p>
             </div>
             <div className="home-action-grid">
-                {actions.map(({ path, label }) => (
+                {actions.map(({ path, label, icon }) => (
                     <button
                         key={path}
                         type="button"
                         onClick={() => navigate(path)}
-                        className="home-action-button"
+                        className="home-action-button flex flex-col items-center justify-center gap-2"
                     >
+                        <span className="text-2xl">{icon}</span>
                         {label}
                     </button>
                 ))}
