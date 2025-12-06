@@ -1,7 +1,6 @@
 -- Create schema
 CREATE SCHEMA IF NOT EXISTS secreterai;
 
--- Sequences
 CREATE SEQUENCE secreterai.account_id_seq;
 CREATE SEQUENCE secreterai.legalese_summary_id_seq;
 CREATE SEQUENCE secreterai.daily_schedule_id_seq;
@@ -9,6 +8,8 @@ CREATE SEQUENCE secreterai.schedule_event_id_seq;
 CREATE SEQUENCE secreterai.bullet_type_id_seq;
 CREATE SEQUENCE secreterai.note_id_seq;
 CREATE SEQUENCE secreterai.note_reminder_id_seq;
+CREATE SEQUENCE secreterai.job_context_id_seq;
+CREATE SEQUENCE secreterai.job_context_prompts_id_seq;
 
 -- account
 CREATE TABLE secreterai.account (
@@ -64,4 +65,18 @@ CREATE TABLE secreterai.note (
     title VARCHAR(100) NOT NULL,
     note_content TEXT,
     reminder_id INT REFERENCES secreterai.note_reminder(id)
+);
+
+-- job_context
+CREATE TABLE secreterai.job_context (
+    id INT PRIMARY KEY DEFAULT nextval('secreterai.job_context_id_seq'),
+    job_name VARCHAR NOT NULL
+);
+
+-- job_context_prompts
+CREATE TABLE secreterai.job_context_prompts (
+    id INT PRIMARY KEY DEFAULT nextval('secreterai.job_context_prompts_id_seq'),
+    job_context_id INT NOT NULL REFERENCES secreterai.job_context(id),
+    account_id INT REFERENCES secreterai.account(id),
+    prompt TEXT NOT NULL
 );
