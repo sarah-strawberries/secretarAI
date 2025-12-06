@@ -29,11 +29,11 @@ function AuthenticatedHome({ displayName }: { displayName: string }) {
     const navigate = useNavigate();
     const actions = [
         { path: "/emails", label: "Email Management", icon: <EnvelopeFill /> },
-        { path: "/schedule", label: "Schedule Generator", icon: <ClockFill /> },
         { path: "/tasks", label: "Tasks", icon: <CheckSquareFill /> },
-        { path: "/notes", label: "Notes", icon: <JournalText /> },
-        { path: "/legalese-summarizer", label: "Legalese Summarizer", icon: <FileEarmarkTextFill /> },
+        { path: "/schedule", label: "Schedule Generator", icon: <ClockFill /> },
         { path: "/calendar", label: "Calendar", icon: <CalendarDateFill /> },
+        { path: "/legalese-summarizer", label: "Legalese Summarizer", icon: <FileEarmarkTextFill /> },
+        { path: "/notes", label: "Notes", icon: <JournalText /> },
     ];
 
     return (
