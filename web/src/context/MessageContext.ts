@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import type { UseMutationResult } from "@tanstack/react-query";
+import { JobContext } from "../types/JobContext";
 
 export type ChatRole = "user" | "assistant" | "system";
 
@@ -18,16 +19,26 @@ export interface SendMessageResponse {
   assistantText: string;
 }
 
+export interface SendMessageArgs {
+  content: string;
+  jobContext?: JobContext;
+}
+
+export interface CreateConversationArgs {
+  jobContext?: JobContext;
+}
+
 export interface MessageContextValue {
   messages: ChatMessage[];
   mostRecentAiResponse: string;
   loading: boolean;
-  sendMessageMutation: UseMutationResult<SendMessageResponse, Error, string>;
+  sendMessageMutation: UseMutationResult<SendMessageResponse, Error, SendMessageArgs>;
   conversations: { id: number; title?: string | null | undefined }[];
   conversationsLoading: boolean;
   conversationId: number | null;
-  createConversationMutation: UseMutationResult<number, Error, void>;
+  createConversationMutation: UseMutationResult<number, Error, CreateConversationArgs | void>;
   selectConversation: (id: number) => Promise<void>;
+  resetChat: () => void;
 }
 
 export const MessageContext = createContext<MessageContextValue | undefined>(

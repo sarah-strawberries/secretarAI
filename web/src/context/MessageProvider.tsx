@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MessageContext, type ChatMessage } from "./MessageContext";
+import { MessageContext, type ChatMessage, type SendMessageArgs, type CreateConversationArgs } from "./MessageContext";
 import { z } from "zod";
 import { useQuery, useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
@@ -68,14 +68,18 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     queryFn: fetchConversations,
   });
 
-  const createConversation = async () => {
+  const createConversation = async (args?: CreateConversationArgs) => {
+    const body: any = { title: "Chat Session" };
+    if (args?.jobContext) {
+      body.jobContext = args.jobContext;
+    }
     const res = await fetch("/api/conversations", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
         "Authorization": `Bearer ${auth.user?.access_token}`
       },
-      body: JSON.stringify({ title: "Chat Session" }),
+      body: JSON.stringify(body),
     });
     if (!res.ok) {
       toast.error(`Oops, an error occurred! Status code: ${res.status}`);
@@ -135,7 +139,7 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     enabled: !!conversationId,
   });
 
-  const sendLatestMessage = async (latestUserInput: string): Promise<{ conversationId: number; assistantText: string }> => {
+  const sendLatestMessage = async ({ content: latestUserInput, jobContext }: SendMessageArgs): Promise<{ conversationId: number; assistantText: string }> => {
       const input = latestUserInput.trim();
       if (!input) {
         throw new Error("Message cannot be empty");
@@ -144,7 +148,7 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
       setAiResponse("");
       let convId = conversationId;
       if (!convId) {
-        convId = await createConversation();
+        convId = await createConversation({ jobContext });
         setConversationId(convId);
       }
 

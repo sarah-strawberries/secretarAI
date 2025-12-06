@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import './index.css'
 import App from './App.tsx'
 import { tokenStorage } from './services/tokenStorage.ts';
+import { MessageProvider } from './context/MessageProvider.tsx';
 
 Log.setLogger(console);
 Log.setLevel(Log.INFO);
@@ -31,10 +32,12 @@ const onSigninCallback = () => {
 createRoot(document.getElementById('root')!).render(
     <AuthProvider {...oidcConfig} userStore={userStore} stateStore={stateStore} onSigninCallback={onSigninCallback}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App />
-          <Toaster />
-        </BrowserRouter>
+        <MessageProvider>
+          <BrowserRouter>
+            <App />
+            <Toaster />
+          </BrowserRouter>
+        </MessageProvider>
       </QueryClientProvider>
     </AuthProvider>,
 )

@@ -1,6 +1,7 @@
 using Dapper;
 using Npgsql;
 using System.Data;
+using api.Models;
 
 namespace api.Services;
 
@@ -19,16 +20,16 @@ public class DatabaseService
         return new NpgsqlConnection(_connectionString);
     }
 
-    public async Task EnsureAccountExistsAsync(string email, string displayName)
+    public async Task EnsureAccountExistsAsync(Account account)
     {
         using var connection = CreateConnection();
         var sql = "SELECT COUNT(1) FROM secretarai.account WHERE email = @Email";
-        var count = await connection.ExecuteScalarAsync<int>(sql, new { Email = email });
+        var count = await connection.ExecuteScalarAsync<int>(sql, new { Email = account.Email });
 
         if (count == 0)
         {
             var insertSql = "INSERT INTO secretarai.account (email, display_name) VALUES (@Email, @DisplayName)";
-            await connection.ExecuteAsync(insertSql, new { Email = email, DisplayName = displayName });
+            await connection.ExecuteAsync(insertSql, new { Email = account.Email, DisplayName = account.DisplayName });
         }
     }
 }

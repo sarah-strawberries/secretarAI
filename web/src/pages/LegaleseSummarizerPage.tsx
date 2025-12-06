@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import ChatComponent from "../components/ChatComponent";
+import { JobContext } from "../types/JobContext";
 
 export function LegaleseSummarizerPage() {
     const navigate = useNavigate();
@@ -12,8 +14,8 @@ export function LegaleseSummarizerPage() {
                 &lt; Back
             </button>
             <h1 className="page-title">Legalese Summarizer</h1>
-            <div className="page-placeholder">
-                This page coming soon!
+            <div className="mt-8 max-w-4xl mx-auto">
+                <ChatComponent jobContext={JobContext.LegaleseSummarization} />
             </div>
         </div>
     );
