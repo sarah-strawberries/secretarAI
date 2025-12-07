@@ -47,14 +47,14 @@ public class ChatController : ControllerBase
         {
             var accountId = await GetCurrentAccountIdAsync();
             using var conn = _db.CreateConnection();
-            
+
             var sql = @"
                 INSERT INTO secreterai.conversation(account_id, title) 
                 VALUES(@AccountId, @Title)
                 RETURNING id, account_id, title, created_at";
-            
+
             var conversation = await conn.QuerySingleAsync<Conversation>(sql, new { AccountId = accountId, Title = request.Title });
-            
+
             return Ok(new CreateConversationResponse(conversation));
         }
         catch (Exception ex)
@@ -80,7 +80,7 @@ public class ChatController : ControllerBase
                 ORDER BY created_at DESC, id DESC";
 
             var conversations = await conn.QueryAsync<Conversation>(sql, new { AccountId = accountId });
-            
+
             return Ok(new ListConversationsResponse(conversations));
         }
         catch (Exception ex)
@@ -100,7 +100,7 @@ public class ChatController : ControllerBase
             // Verify conversation ownership
             var convSql = "SELECT count(1) FROM secreterai.conversation WHERE id = @Id AND account_id = @AccountId";
             var exists = await conn.ExecuteScalarAsync<int>(convSql, new { Id = id, AccountId = accountId });
-            
+
             if (exists == 0)
             {
                 return NotFound(new { error = "Conversation not found or access denied" });
@@ -113,7 +113,7 @@ public class ChatController : ControllerBase
                 ORDER BY created_at ASC, id ASC";
 
             var messages = await conn.QueryAsync<Message>(sql, new { ConversationId = id });
-            
+
             return Ok(new ListMessagesResponse(messages));
         }
         catch (Exception ex)
@@ -133,7 +133,7 @@ public class ChatController : ControllerBase
             // Verify conversation ownership
             var convSql = "SELECT count(1) FROM secreterai.conversation WHERE id = @Id AND account_id = @AccountId";
             var exists = await conn.ExecuteScalarAsync<int>(convSql, new { Id = request.ConversationId, AccountId = accountId });
-            
+
             if (exists == 0)
             {
                 return NotFound(new { error = "Conversation not found or access denied" });
@@ -145,7 +145,7 @@ public class ChatController : ControllerBase
                 FROM secreterai.message 
                 WHERE conversation_id = @ConversationId AND role IN ('user','assistant') 
                 ORDER BY created_at ASC, id ASC";
-            
+
             var priorMessages = (await conn.QueryAsync<AiMessage>(priorSql, new { ConversationId = request.ConversationId })).ToList();
 
             // Insert user message
@@ -153,15 +153,15 @@ public class ChatController : ControllerBase
                 INSERT INTO secreterai.message(conversation_id, role, content) 
                 VALUES(@ConversationId, 'user', @Content)
                 RETURNING id, conversation_id, role, content, created_at";
-            
+
             var userMessage = await conn.QuerySingleAsync<Message>(insertUserSql, new { ConversationId = request.ConversationId, Content = request.Content });
 
             // Auto-title if first message
             if (!priorMessages.Any())
             {
-                _ = Task.Run(async () => 
+                _ = Task.Run(async () =>
                 {
-                    try 
+                    try
                     {
                         var titlePromptMessages = new List<AiMessage>
                         {
@@ -171,14 +171,14 @@ public class ChatController : ControllerBase
 
                         var titleReq = new AiChatCompletionRequest(AiModel, titlePromptMessages);
                         var titleRes = await _httpClient.PostAsJsonAsync(AiUrl, titleReq);
-                        
+
                         if (titleRes.IsSuccessStatusCode)
                         {
                             var titleJson = await titleRes.Content.ReadFromJsonAsync<AiChatCompletionResponse>();
                             var rawTitle = titleJson?.Choices?.FirstOrDefault()?.Message?.Content ?? "";
                             var cleaned = rawTitle.Replace("\n", " ").Trim();
                             if (cleaned.Length > 60) cleaned = cleaned.Substring(0, 60);
-                            
+
                             if (!string.IsNullOrWhiteSpace(cleaned))
                             {
                                 using var updateConn = _db.CreateConnection();
@@ -186,7 +186,7 @@ public class ChatController : ControllerBase
                             }
                         }
                     }
-                    catch 
+                    catch
                     {
                         // Ignore title generation errors
                     }
@@ -201,7 +201,7 @@ public class ChatController : ControllerBase
 
             var aiReq = new AiChatCompletionRequest(AiModel, messagesForAi);
             var aiRes = await _httpClient.PostAsJsonAsync(AiUrl, aiReq);
-            
+
             if (!aiRes.IsSuccessStatusCode)
             {
                 return StatusCode((int)aiRes.StatusCode, new { error = "AI service failed" });
@@ -220,7 +220,7 @@ public class ChatController : ControllerBase
                 INSERT INTO secreterai.message(conversation_id, role, content) 
                 VALUES(@ConversationId, 'assistant', @Content)
                 RETURNING id, conversation_id, role, content, created_at";
-            
+
             var assistantMessage = await conn.QuerySingleAsync<Message>(insertAiSql, new { ConversationId = request.ConversationId, Content = assistantText });
 
             return Ok(new SendMessageResponse(request.ConversationId, userMessage, assistantMessage, assistantText));

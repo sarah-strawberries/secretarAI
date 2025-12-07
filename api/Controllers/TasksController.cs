@@ -24,7 +24,7 @@ public class TasksController : ControllerBase
     private async Task<string> GetGoogleAccessTokenAsync()
     {
         var keycloakToken = HttpContext.Request.Headers.Authorization.ToString().Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
-        
+
         if (string.IsNullOrEmpty(keycloakToken))
         {
             throw new UnauthorizedAccessException("No Keycloak token found.");
