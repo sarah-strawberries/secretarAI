@@ -10,6 +10,8 @@ CREATE SEQUENCE secreterai.note_id_seq;
 CREATE SEQUENCE secreterai.note_reminder_id_seq;
 CREATE SEQUENCE secreterai.job_context_id_seq;
 CREATE SEQUENCE secreterai.job_context_prompts_id_seq;
+CREATE SEQUENCE secreterai.conversation_id_seq;
+CREATE SEQUENCE secreterai.message_id_seq;
 
 -- account
 CREATE TABLE secreterai.account (
@@ -80,3 +82,23 @@ CREATE TABLE secreterai.job_context_prompts (
     account_id INT REFERENCES secreterai.account(id),
     prompt TEXT NOT NULL
 );
+
+-- conversation
+CREATE TABLE secreterai.conversation (
+    id INT PRIMARY KEY DEFAULT nextval('secreterai.conversation_id_seq'),
+    account_id INT NOT NULL REFERENCES secreterai.account(id),
+    title TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
+-- message
+CREATE TABLE secreterai.message (
+    id INT PRIMARY KEY DEFAULT nextval('secreterai.message_id_seq'),
+    conversation_id INT NOT NULL REFERENCES secreterai.conversation(id) ON DELETE CASCADE,
+    role TEXT NOT NULL CHECK (role IN ('user', 'assistant', 'system')),
+    content TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_message_conversation_id ON secreterai.message(conversation_id);
+CREATE INDEX idx_message_conversation_created ON secreterai.message(conversation_id, created_at);
