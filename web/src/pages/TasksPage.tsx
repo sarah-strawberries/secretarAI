@@ -59,20 +59,20 @@ export function TasksPage() {
             <div className="flex gap-4 mb-4">
                 <button 
                     onClick={handleGetTaskLists}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow-sm transition-colors"
+                    className="home-action-button"
                 >
                     Get Task Lists
                 </button>
                 <button 
                     onClick={handleGetTasksForLists}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded shadow-sm transition-colors"
+                    className="home-action-button"
                 >
                     Get Tasks for All Lists
                 </button>
             </div>
             {data && (
-                <div className="bg-slate-100 p-4 rounded overflow-auto max-h-[500px] border border-slate-200">
-                    <pre className="text-sm text-slate-800">{JSON.stringify(data, null, 2)}</pre>
+                <div className="tasks-data-container">
+                    <pre className="tasks-data-pre">{JSON.stringify(data, null, 2)}</pre>
                 </div>
             )}
         </div>

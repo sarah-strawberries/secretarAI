@@ -544,3 +544,15 @@ a {
   background-color: var(--tan-700);
   color: var(--tan-100);
 }
+
+.tasks-data-container {
+  @apply p-4 rounded overflow-auto border;
+  background-color: var(--bluegrey-100);
+  border-color: var(--bluegrey-200);
+  max-height: 500px;
+}
+
+.tasks-data-pre {
+  @apply text-sm;
+  color: var(--coolgrey-700);
+}
