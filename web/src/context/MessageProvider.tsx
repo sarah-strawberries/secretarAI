@@ -47,14 +47,12 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
       }
     });
     if (!res.ok) {
-      toast.error(`An error occurred while fetching conversations. Status code: ${res.status}`);
-      throw new Error('Failed to fetch conversations');
+      throw new Error(`An error occurred while fetching conversations. Status code: ${res.status}`);
     }
     const json = await res.json();
     const parsed = ListConversationsResponseSchema.safeParse(json);
     if (!parsed.success) {
-      toast.error('A parsing error occurred. Status code: 500');
-      throw new Error('Invalid conversations response');
+      throw new Error('A parsing error occurred. Status code: 500');
     }
     return parsed.data.conversations;
   };
@@ -63,10 +61,18 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     data: conversations = [],
     refetch: refreshConversations,
     isLoading: conversationsLoading,
+    error: conversationsError,
+    isError: isConversationsError,
   } = useQuery({
     queryKey: ['conversations'],
     queryFn: fetchConversations,
   });
+
+  React.useEffect(() => {
+    if (isConversationsError && conversationsError) {
+      toast.error(conversationsError.message, { id: 'fetch-conversations-error' });
+    }
+  }, [isConversationsError, conversationsError]);
 
   const createConversation = async (args?: CreateConversationArgs) => {
     const body: any = { title: "Chat Session" };
@@ -82,14 +88,12 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
       body: JSON.stringify(body),
     });
     if (!res.ok) {
-      toast.error(`Oops, an error occurred! Status code: ${res.status}`);
-      throw new Error("Failed to create conversation");
+      throw new Error(`Oops, an error occurred! Status code: ${res.status}`);
     }
     const json = await res.json();
     const parsed = CreateConversationResponseSchema.safeParse(json);
     if (!parsed.success) {
-      toast.error('Oops, an error occurred! Status code: 500');
-      throw new Error("Failed to create conversation");
+      throw new Error('Oops, an error occurred! Status code: 500');
     }
     return parsed.data.conversation.id;
   };
@@ -99,8 +103,8 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     onSuccess: () => {
       refreshConversations();
     },
-    onError: () => {
-      toast.error('Oops, an error occurred! Status code: 500');
+    onError: (error) => {
+      toast.error(error.message, { id: 'create-conversation-error' });
     },
   });
 
@@ -117,14 +121,12 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
       }
     });
     if (!res.ok) {
-      toast.error(`Oops, an error occurred! Status code: ${res.status}`);
-      throw new Error('Failed to fetch messages');
+      throw new Error(`Oops, an error occurred! Status code: ${res.status}`);
     }
     const json = await res.json();
     const parsed = ListMessagesResponseSchema.safeParse(json);
     if (!parsed.success) {
-      toast.error('Oops, an error occurred! Status code: 500');
-      throw new Error('Invalid messages response');
+      throw new Error('Oops, an error occurred! Status code: 500');
     }
     return parsed.data.messages as ChatMessage[];
   };
@@ -133,11 +135,19 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
     data: messages = [],
     isLoading: loading,
     refetch: refetchMessages,
+    error: messagesError,
+    isError: isMessagesError,
   } = useQuery({
     queryKey: ['messages', conversationId],
     queryFn: () => fetchMessages(conversationId),
     enabled: !!conversationId,
   });
+
+  React.useEffect(() => {
+    if (isMessagesError && messagesError) {
+      toast.error(messagesError.message, { id: 'fetch-messages-error' });
+    }
+  }, [isMessagesError, messagesError]);
 
   const sendLatestMessage = async ({ content: latestUserInput, jobContext }: SendMessageArgs): Promise<{ conversationId: number; assistantText: string }> => {
       const input = latestUserInput.trim();

@@ -112,7 +112,7 @@ export function ScheduleGeneratorPage() {
                 type="button"
                 className="mt-6 schedule-secondary-button"
               >
-                Generate Schedule (this feature coming soon!)
+                Generate Schedule (this feature coming soon!) {/* TODO: Remove the "coming soon" when schedule generating is added*/}
               </button>
             </div>
             <div className="schedule-fieldset">
