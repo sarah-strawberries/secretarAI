@@ -530,3 +530,17 @@ a {
   border: 1px solid var(--blue-500) !important;
   color: var(--blue-700) !important;
 }
+
+.error-boundary-container {
+  background-color: var(--tan-100);
+  color: var(--tan-800);
+}
+
+.error-boundary-pre {
+  background-color: var(--tan-200);
+}
+
+.error-boundary-button {
+  background-color: var(--tan-700);
+  color: var(--tan-100);
+}
