@@ -7,6 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<DatabaseService>();
+builder.Services.AddHttpClient<TasksService>();
+builder.Services.AddHttpClient("GoogleAuthClient", client =>
+{
+    client.BaseAddress = new Uri("https://auth-dev.snowse.io/realms/secretarai/");
+});
 var allowedOrigin = builder.Configuration["ALLOWED_ORIGIN"] ?? "http://localhost:5173";
 builder.Services.AddCors(options =>
 {
