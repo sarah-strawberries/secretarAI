@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 builder.Services.AddScoped<DatabaseService>();
 builder.Services.AddHttpClient<TasksService>();
 builder.Services.AddHttpClient("GoogleAuthClient", client =>
@@ -76,6 +77,8 @@ app.MapPost("/account-login", async (DatabaseService db, AccountLogin request) =
     return Results.Ok();
 })
 .RequireAuthorization();
+
+app.MapControllers();
 
 app.Run();
 
