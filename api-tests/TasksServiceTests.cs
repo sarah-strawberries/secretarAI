@@ -26,11 +26,11 @@ public class TasksServiceTests
         _tasksService = new TasksService(_httpClient);
     }
 
-    // [TearDown]
-    // public void TearDown()
-    // {
-    //     _httpClient.Dispose();
-    // }
+    [TearDown]
+    public void TearDown()
+    {
+        _httpClient.Dispose();
+    }
 
     [Test]
     public async Task GetTaskListsAsync_ReturnsTaskLists_WhenResponseIsSuccess()
@@ -65,7 +65,7 @@ public class TasksServiceTests
         // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result.Count, Is.EqualTo(2));
-        Assert.That(result[0].Id, Is.EqualTo("list1"));
+        Assert.That(result[0].Id, Is.EqualTo("list11"));
         Assert.That(result[1].Title, Is.EqualTo("List 2"));
     }
 

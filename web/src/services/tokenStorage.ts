@@ -19,7 +19,7 @@ export function tokenStorage(): Storage {
     ls.setItem(testKey, '1');
     ls.removeItem(testKey);
     return ls;
-  } catch (error) {
+  } catch {
     const memory = new Map<string, string>();
     const fallback = {
       getItem: (k: string) => memory.has(k) ? memory.get(k)! : null,

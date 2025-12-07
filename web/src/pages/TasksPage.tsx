@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAppAuth } from "../hooks/useAppAuth";
 import { getTaskLists, getTasksForLists } from "../services/tasksService";
+import type { TaskListResponseDto, TaskDto } from "../types/Task";
 
 export function TasksPage() {
     const navigate = useNavigate();
     const auth = useAppAuth();
-    const [data, setData] = useState<any>(null);
+    const [data, setData] = useState<TaskListResponseDto | Record<string, TaskDto[]> | null>(null);
 
     const handleGetTaskLists = async () => {
         if (!auth.user?.access_token) {

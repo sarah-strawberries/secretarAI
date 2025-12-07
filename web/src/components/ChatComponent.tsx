@@ -20,7 +20,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ jobContext }) => {
 
   useEffect(() => {
       resetChat();
-  }, [jobContext]);
+  }, [jobContext, resetChat]);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();

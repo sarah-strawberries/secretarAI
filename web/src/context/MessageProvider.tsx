@@ -75,10 +75,10 @@ export const MessageProvider: React.FC<Props> = ({ children }) => {
   }, [isConversationsError, conversationsError]);
 
   const createConversation = async (args?: CreateConversationArgs) => {
-    const body: any = { title: "Chat Session" };
-    if (args?.jobContext) {
-      body.jobContext = args.jobContext;
-    }
+    const body = { 
+      title: "Chat Session",
+      jobContext: args?.jobContext 
+    };
     const res = await fetch("/api/conversations", {
       method: "POST",
       headers: { 
