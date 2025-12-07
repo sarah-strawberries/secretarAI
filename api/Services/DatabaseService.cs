@@ -32,4 +32,11 @@ public class DatabaseService
             await connection.ExecuteAsync(insertSql, new { Email = account.Email, DisplayName = account.DisplayName });
         }
     }
+
+    public async Task<Account?> GetAccountByEmailAsync(string email)
+    {
+        using var connection = CreateConnection();
+        var sql = "SELECT id, email, display_name as DisplayName FROM secretarai.account WHERE email = @Email";
+        return await connection.QuerySingleOrDefaultAsync<Account>(sql, new { Email = email });
+    }
 }
